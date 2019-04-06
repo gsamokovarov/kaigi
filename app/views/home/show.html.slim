@@ -9,10 +9,10 @@ section.center
   h2.fragment Genadi Samokovarov
 
 section.center
-  h2 ゲナディ・サモコヴァロフ
+  h2 ゲナディ
 
 section.center data-background="#000"
-  h2.white ゲナディ・サモコヴァロフ
+  h2.white ゲナディ
 
 section.center
   a(href="https://twitter.com/gsamokovarov") twitter.com/gsamokovarov
@@ -48,8 +48,11 @@ section.center data-background="#FCD846"
   a href="https://balkanruby.com"
     img.inline src=image_path("balkan.svg")
 
+section.center data-background-iframe="https://balkanruby.com"
+  a(href="#" class="navigate-next") &gt;
+
 section.center data-background="#000"
-  h2.white Writing <span class="red">Debuggers</span> in Plain Ruby!
+  h2.white.fragment Writing <span class="red">Debuggers</span> in Plain Ruby!
 
 section.center data-background="#F00" data-background-transition="fade"
   h2.white Debugger
@@ -60,6 +63,55 @@ section.center
     br
     a href="https://en.wikipedia.org/wiki/Debugger" https://en.wikipedia.org/wiki/Debugger
 
+section.center
+  h2 <span class="red">Debugging tool</span> <span class="fragment">🤔</span>
+
+section.center
+  h2.fragment Kernel#puts <span class="fragment">😅</span>
+
+section.center
+  h2 👍
+
+section.center
+  a href="https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html" I am a puts debuggerer
+
+section.center data-background-iframe="https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html"
+  a(href="#" class="navigate-next") &gt;
+
+section.center
+  h2 Binding#pry
+
+section.center
+  h2 Binding#irb
+
+section.center data-background-iframe="/console"
+  h2 Binding#irb
+  a(href="#" class="navigate-next") &gt;
+
+section.center
+  h2 👌
+
+section.center
+  h2.fragment Byebug
+
+section.center data-background="#000"
+  p.white Interrupts of the debugged program.
+
+section.center data-background="#000" data-background-transition="none"
+  p.white Gives you control over its execution.
+
+section.center data-background="#000" data-background-transition="none"
+  p.white Let's you step-in(to) method calls.
+
+section.center data-background="#000" data-background-transition="none"
+  p.white Let's you step-out of method calls.
+
+section.center data-background="#000" data-background-transition="none"
+  p.white Let's you step-over of method calls.
+
+section.center
+  h2 🙌
+
 section.center data-background="#000"
   h2.fragment.white debug.rb
 
@@ -67,42 +119,86 @@ section.center
   h2.fragment 🤚
 
 section.center
-  h2 😀
-  p Comes built-in with every CRuby installation.
+  p Part of the standard library.
 
 section.center
-  h2 😀
+  a href="https://github.com/ruby/ruby/blob/3db12e8b236ac8f88db8eb4690d10e4a3b8dbcd4/lib/debug.rb" Part of the initial CVS to SVN import during January 1998 🕔
+
+section.center
   p Written in Pure Ruby!
 
 section.center data-background="#000"
-  h2 😀
   p.white Written in Pure Ruby!
+
+section.center data-background="#000"
+  h2 😀
 
 section data-background="https://gifimage.net/wp-content/uploads/2017/08/thats-all-folks-gif-2.gif"
 
-section.center data-background="#000"
-  h2 👍
+section.center data-background="#000" data-background-transition="none"
   p.white Fact!
 
-section.center
-  .fragment
-    h2 😀
-    p GDB like user-interface.
+section.center data-background="#000"
+  h2 👍
 
 section.center
-  h2 ☹️
+  h2.fragment 😀
+
+section.center
+  p Available everywhere.
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      require "debug"
+
+section.center
   p GDB like user-interface.
 
 section.center
-  h2 ☹️
+  h2.fragment ☹️
+
+section.center
+  p GDB like user-interface.
+
+section.center
+  p How do you invoke it twice in the same program run?
+
+section.center
   p Last significant commit from 2013.
 
 section.center
-  h2 ☹️
   p Uses Kernel#set_trace_func
 
 section.center data-background="#000"
   h2.fragment.white Kernel#set_trace_func
+
+section.center
+  p Invokes a proc on significant VM events.
+
+section.center
+  h2 call
+  p call a Ruby method
+
+section.center
+  h2 class
+  p start a class or module definition
+
+section.center
+  h2 end
+  p finish a class or module definition
+
+section.center
+  h2 line
+  p execute code on a new line
+
+section.center
+  h2 raise
+  p raise an exception
+
+section.center
+  h2 return
+  p return from a Ruby method
 
 section.center data-background="#F00"
   h2.fragment.white Post-Mortem Debugging
