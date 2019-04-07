@@ -93,7 +93,7 @@ section.center
   h2.fragment Byebug
 
 section.center data-background="#000"
-  p.white Interrupts of the debugged program.
+  p.white Interrupts the debugged program.
 
 section.center data-background="#000" data-background-transition="none"
   p.white Gives you control over its execution.
@@ -110,6 +110,9 @@ section.center data-background="#000" data-background-transition="none"
 section.center
   h2 🙌
 
+section.center
+  a href="https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html" А Real Debugger! 😂
+
 section.center data-background="#000"
   h2.fragment.white debug.rb
 
@@ -122,21 +125,24 @@ section.center
 section.center
   a href="https://github.com/ruby/ruby/blob/3db12e8b236ac8f88db8eb4690d10e4a3b8dbcd4/lib/debug.rb" Part of the initial CVS to SVN import during January 1998 🕔
 
+section.center data-background-iframe="https://github.com/ruby/ruby/blob/3db12e8b236ac8f88db8eb4690d10e4a3b8dbcd4/lib/debug.rb"
+  a(href="#" class="navigate-next") &gt;
+
 section.center
-  p Written in Pure Ruby!
+  p Written in plain Ruby!
 
 section.center data-background="#000"
-  p.white Written in Pure Ruby!
+  p.white Written in plain Ruby!
 
-section.center data-background="#000"
+section.center data-background="#000" data-background-transition="none"
   h2 😀
 
-section data-background="https://gifimage.net/wp-content/uploads/2017/08/thats-all-folks-gif-2.gif"
+section data-background="https://gifimage.net/wp-content/uploads/2017/08/thats-all-folks-gif-2.gif" data-background-transition="none"
 
 section.center data-background="#000" data-background-transition="none"
   p.white Fact!
 
-section.center data-background="#000"
+section.center data-background="#000" data-background-transition="none"
   h2 👍
 
 section.center
@@ -175,28 +181,323 @@ section.center
   p Invokes a proc on significant VM events.
 
 section.center
-  h2 call
-  p call a Ruby method
+  pre(contenteditable=true): code.ruby
+    '
+      set_trace_func -> event, file, line, id, binding {
+        case event
+        when "call"
+          # A Ruby method is called.
+        end
+      }
 
 section.center
-  h2 class
-  p start a class or module definition
+  pre(contenteditable=true): code.ruby
+    '
+      set_trace_func -> event, file, line, id, binding {
+        case event
+        when "class"
+          # A class or module is opened.
+        end
+      }
 
 section.center
-  h2 end
-  p finish a class or module definition
+  pre(contenteditable=true): code.ruby
+    '
+      set_trace_func -> event, file, line, id, binding {
+        case event
+        when "end"
+          # A class or module is closed.
+        end
+      }
 
 section.center
-  h2 line
+  pre(contenteditable=true): code.ruby
+    '
+      set_trace_func -> event, file, line, id, binding {
+        case event
+        when "line"
+          # A new line of code is executed.
+        end
+      }
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      set_trace_func -> event, file, line, id, binding {
+        case event
+        when "raised"
+          # An exception is raised.
+        end
+      }
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      set_trace_func -> event, file, line, id, binding {
+        case event
+        when "return"
+          # A Ruby method returns.
+        end
+      }
+
+section.center
+  p Soft deprecated in favour of the more modern TracePoint API.
+
+section.center data-background="#000"
+  p.white.fragment Clearly, it's possible to write debuggers in Ruby...
+
+section.center data-background="#000" data-background-transition="none"
+  p.white Why is <span class="red">Byebug</span> written in C?
+
+section.center data-background="#000" data-background-transition="none"
+  h2 🤔
+
+section.center data-background="#F00"
+  h2.white Performance
+
+section.center
+  p <span class="red">Kernel#set_trace_func is slow</span>.
+
+section.center
+  p Invokes the proc for any event, even if you don't need to listen to it.
+
+section.center data-background="#000"
+  h2.white TracePoint API
+
+section.center
+  p Provides Object-Oriented API, similar to the functionality of <span class="red">Kernel#set_trace_func</span>.
+
+section.center
+  p Can listen only to specific events.
+
+section.center
+  p Can easily stop stracing the program.
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      TracePoint.trace(:line, :call, :return) do |trace|
+        case trace.event
+        when :call
+          current.frames &lt;&lt; trace.binding
+          current.depth += 1
+        when :return
+          current.frames.pop
+          current.depth -= 1
+        when :line
+          next if current.depth.positive?
+
+          trace.disable
+
+          context = Context.new(*current.frames[0...-1], trace.binding)
+          context.start
+        end
+      end
+
+section.center data-background="#000"
+  h3.white Events
+
+section.center
+  h3 line
   p execute code on a new line
 
 section.center
-  h2 raise
+  h3 class
+  p start a class or module definition
+
+section.center
+  h3 end
+  p finish a class or module definition
+
+section.center
+  h3 call
+  p call a Ruby method
+
+section.center
+  h3 return
+  p return from a Ruby method
+
+section.center
+  h3 c_call
+  p call a C-language routine
+
+section.center
+  h3 c_return
+  p return from a C-language routine
+
+section.center
+  h3 raise
   p raise an exception
 
 section.center
-  h2 return
-  p return from a Ruby method
+  h3 b_call
+  p event hook at block entry
+
+section.center
+  h3 b_return
+  p event hook at block ending
+
+section.center
+  h3 thread_begin
+  p event hook at thread beginning
+
+section.center
+  h3 thread_end
+  p event hook at thread ending
+
+section.center
+  h3 fiber_switch
+  p event hook at fiber switch
 
 section.center data-background="#F00"
-  h2.fragment.white Post-Mortem Debugging
+  h2.white Post-Mortem Debugging
+
+section.center
+  p Post-mortem debugging is debugging of the program after it has already crashed.
+
+section.center data-background="#F00"
+  h2.white Pry-open the VM stack frames
+
+section.center
+  p Kernel#caller
+
+section.center
+  p Kernel#caller_locations
+
+section.center data-background="#000"
+  h2.white Debug Inspector API
+
+section.center
+  p Let's you open the VM stack frames and build Binding objects for them.
+
+section.center
+  p CRuby specific and available only in C.
+
+section.center
+  p High-level API.
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data); 👈
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *); 👈
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc); 👈
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index); 👈
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index); 👈
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index); 👈
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      /* debug inspector APIs */
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index); 👈
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
