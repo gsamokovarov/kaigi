@@ -353,7 +353,7 @@ section.center data-background="#000"
   h2.white ruby-debug
 
 section.center
-  p ruby-debug is a fast implementation of the standard debugger debug.rb.
+  p ruby-debug is a fast implementation of the standard debugger <span class="red">debug.rb</span>.
 
 section.center
   p An old project, works for Ruby 1.8 and Ruby 1.9.
@@ -374,7 +374,7 @@ section.center
   p The <span class="red">TracePoint API</span> solves most of the problems that sprouted the existence of <span class="red">ruby-debug</span>.
 
 section.center
-  p It was quite harder to write debuggers back in the days. 👵
+  p Writing debuggers back in the days was way more convoluted. 👵
 
 section.center data-background="#F00"
   h2.white Post-Mortem Debugging
@@ -472,6 +472,44 @@ section.center
 
 section.center
   p The debuggers can become more or less UX work that is portable across VMs.
+
+section.center data-background="#000"
+  h2.white Pros & Cons
+
+section.center
+  h2 Cons
+  ul
+    li.fragment Performance
+
+section.center
+  h2 Pros
+  ul
+    li.fragment Portable debugging tools
+    li.fragment Adoption
+
+section.center data-background="#0F0"
+  h2 Case Study
+
+section.center
+  img.inline src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Python_logo_and_wordmark.svg"
+
+section.center
+  a href="https://docs.python.org/3/library/sys.html?highlight=sys%20_getframe#sys._getframe" sys._getframe
+
+section.center
+  h2 😅
+
+section.center data-background-iframe="https://docs.python.org/3/library/sys.html?highlight=sys%20_getframe#sys._getframe"
+  a(href="#" class="navigate-next") &gt;
+
+section.center
+  a href="https://docs.python.org/3/reference/datamodel.html#frame-objects" Frame Objects
+
+section.center data-background-iframe="https://docs.python.org/3/reference/datamodel.html#frame-objects"
+  a(href="#" class="navigate-next") &gt;
+
+section.center
+  a href="https://github.com/banister/binding_of_caller" binding_of_caller
 
 section.center data-background="#000"
   h2.white Boogah
