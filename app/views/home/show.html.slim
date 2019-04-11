@@ -32,22 +32,72 @@ section.center data-background="https://www.mapsland.com/maps/europe/bulgaria/la
   h2.shadow Bulgaria
   = copyright "Wikipedia", "https://en.wikipedia.org/wiki/Bulgaria"
 
-section data-background="https://cdn2.wanderlust.co.uk/media/2637/articles-public-mineral-baths-sofia-bulgaria-dreamstime.jpg"
+section data-background="https://upload.wikimedia.org/wikipedia/commons/a/ad/AlexanderNevskyCathedral-Sofia-6.jpg"
   h2.white.shadow Sofia
-  = copyright "Wanderlust", "https://www.wanderlust.co.uk/content/short-break-guide-to-sofia-bulgaria/"
+  = copyright "Alexander Nevsky Cathedral", "https://en.wikipedia.org/wiki/Alexander_Nevsky_Cathedral%2C_Sofia"
 
-section data-background="https://cdn2.wanderlust.co.uk/media/2632/magazine-1335.jpg"
-  h2.white.shadow Sofia
-  = copyright "Wanderlust", "https://www.wanderlust.co.uk/content/short-break-guide-to-sofia-bulgaria/"
+section data-background="https://mir-s3-cdn-cf.behance.net/project_modules/fs/5ed17647510181.587cf8e0cafbe.jpg"
+  h2.white.shadow НДК
+  = copyright "Dimitar Karanikolov", "http://www.dimitarkaranikolov.com/"
 
-section data-background="https://cdn2.wanderlust.co.uk/media/2633/magazine-2328.jpg"
-  h2.white.shadow Sofia
-  = copyright "Wanderlust", "https://www.wanderlust.co.uk/content/short-break-guide-to-sofia-bulgaria/"
+section data-background="https://mir-s3-cdn-cf.behance.net/project_modules/fs/cd6c3d47510181.587cf8e0cc19c.jpg"
+  h2.white.shadow НДК
+  = copyright "Dimitar Karanikolov", "http://www.dimitarkaranikolov.com/"
+
+section data-background="https://upload.wikimedia.org/wikipedia/commons/5/52/20140622_Buzludzha_016.jpg"
+  h2.white.shadow Buzludzha
+  = copyright "Buzludzha monument", "https://en.wikipedia.org/wiki/Buzludzha_monument"
 
 section.center data-background="#FCD846"
   a href="https://balkanruby.com"
     img.inline src=image_path("balkan.svg")
   p 17–18 May in Sofia, Bulgaria
+
+section data-background="https://mir-s3-cdn-cf.behance.net/project_modules/fs/47ba5e47510181.587d0008bf99e.jpg"
+  h2.white.shadow НДК
+  = copyright "Dimitar Karanikolov", "http://www.dimitarkaranikolov.com/"
+
+section.center data-background-iframe="https://rubykaigi.org/2019/schedule"
+  a(href="#" class="navigate-next") &gt;
+
+section.center data-background="#000"
+  h2.white.fragment Web Console
+
+section.center data-background="#000"
+  p.white A debugger that doesn't stop the world 🌍
+
+section.center data-background="#000"
+  p.white Included by default in <span class="red">Rails 4.2</span>.
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      group :development do
+        gem 'listen', '>= 3.0.5', '< 3.2'
+        gem 'web-console'
+        gem 'spring'
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      group :development do
+        gem 'listen', '>= 3.0.5', '< 3.2'
+        gem 'web-console' 👈
+        gem 'spring'
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      group :development do
+        gem 'listen', '>= 3.0.5', '< 3.2'
+        gem 'web-console' 👌
+        gem 'spring'
+      end
+
+section.center data-background-iframe="/error"
+  a(href="#" class="navigate-next") &gt;
 
 section.center data-background="#000"
   h2.white.fragment Writing <span class="red">Debuggers</span> in Plain Ruby!
@@ -83,7 +133,6 @@ section.center
   h2 Binding#irb
 
 section.center data-background-iframe="/console"
-  h2 Binding#irb
   a(href="#" class="navigate-next") &gt;
 
 section.center
@@ -91,6 +140,9 @@ section.center
 
 section.center
   h2.fragment Byebug
+
+section.center data-background-iframe="/console"
+  a(href="#" class="navigate-next") &gt;
 
 section.center data-background="#000"
   p.white Interrupts the debugged program.
@@ -133,17 +185,6 @@ section.center data-background="#000"
 
 section.center data-background="#000" data-background-transition="none"
   h2 😀
-
-section data-background="https://gifimage.net/wp-content/uploads/2017/08/thats-all-folks-gif-2.gif" data-background-transition="none"
-
-section.center data-background="#000" data-background-transition="none"
-  p.white Fact!
-
-section.center data-background="#000" data-background-transition="none"
-  h2 👍
-
-section.center
-  h2.fragment 😀
 
 section.center
   p Available everywhere.
@@ -359,15 +400,19 @@ section.center
   p An old project, works for Ruby 1.8 and Ruby 1.9.
 
 section.center data-background="#FFF"
+  h3 Ruby 1.8
   a href="https://github.com/ruby-debug/ruby-debug" ruby-debug
 
 section.center data-background="#EEE"
+  h3 Rewritten for Ruby 1.9
   a href="https://github.com/ruby-debug/ruby-debug-base19" ruby-debug-base-19
 
 section.center data-background="#DDD"
+  h3 Fork or ruby-debug-base for Ruby 2.x
   a href="https://github.com/cldwalker/debugger" debugger
 
 section.center data-background="#CCC"
+  h3 Unexported Ruby headers
   a href="https://github.com/cldwalker/debugger-ruby_core_source" debugger-ruby_core_source
 
 section.center
@@ -461,6 +506,75 @@ section.center
 section.center data-background="#00F"
   h4.white DebugInspector#open
 
+section.center
+  a href="https://github.com/banister/debug_inspector" debug_inspector
+  = copyright "@banister", "https://github.com/banister/debug_inspector"
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      require 'debug_inspector'
+
+      RubyVM::DebugInspector.open { |dc|
+        locs = dc.backtrace_locations
+
+        # you can get depth of stack frame with `locs.size'
+        locs.size.times do |i|
+          # binding of i-th caller frame (returns a Binding object or nil)
+          p dc.frame_binding(i)
+
+          # iseq of i-th caller frame (returns a RubyVM::InstructionSequence object or nil)
+          p dc.frame_iseq(i)
+
+          # class of i-th caller frame
+          p dc.frame_class(i)
+        end
+      }
+  = copyright "debug_inspector", "https://github.com/banister/debug_inspector"
+
+section.center
+  pre(contenteditable=true): code.c
+    '
+      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
+      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
+
+      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
+      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
+      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
+  = copyright "debug_inspector", "https://github.com/banister/debug_inspector"
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      require 'debug_inspector'
+
+      DebugInspector.open do |context|
+        locations = context.backtrace_locations
+
+        locations.size.times do |i|
+          # binding of i-th caller frame (returns a Binding object or nil)
+          p context.frame_binding(i)
+
+          # iseq of i-th caller frame (returns a RubyVM::InstructionSequence object or nil)
+          p context.frame_iseq(i)
+
+          # class of i-th caller frame
+          p context.frame_class(i)
+        end
+      end
+
+section.center
+  h2 👍
+
+section.center
+  h2 👎
+
+section.center data-background-iframe="/error"
+  a(href="#" class="navigate-next") &gt;
+
 section.center data-background="#00F"
   h4.white Thread::Backtrace::Location#binding
 
@@ -468,24 +582,73 @@ section.center
   p A suggestion by @tomenebo from Kaigi 2018.
 
 section.center
-  p The APIs can be implemented by the VM maintainers.
+  pre(contenteditable=true): code.ruby
+    '
+      backtrace = caller_locations
+      if trace = backtrace[3]
+        # C frames cannot build binding.
+        trace.binding
+      end
 
 section.center
-  p The debuggers can become more or less UX work that is portable across VMs.
+  pre(contenteditable=true): code.ruby
+    '
+      backtrace = caller_locations
+      if trace = backtrace[3]
+        # Have optimizing VM like JRuby or TruffleRuby?
+        trace.binding
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      backtrace = caller_locations
+      if trace = backtrace[3]
+        # Return nil for for such frames.
+        trace.binding
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      backtrace = caller_locations
+      if trace = backtrace[3]
+        # Produce a warning, if you wish.
+        trace.binding
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      backtrace = caller_locations
+      if trace = backtrace[3]
+        # No need for trace <=> binding mapping!
+        trace.binding
+      end
+
+section.center
+  h2 👍
 
 section.center data-background="#000"
+  p.white The APIs can be implemented by the VM maintainers.
+
+section.center data-background="#000" data-background-transition="none"
+  p.white The debuggers can become more or less UX work that is portable across VMs.
+
+section.center data-background="#000" data-background-transition="none"
   h2.white Pros & Cons
 
 section.center
   h2 Cons
   ul
-    li.fragment Performance
+    li.fragment Performance!
+    li.fragment Dangerous operations?
 
 section.center
   h2 Pros
   ul
-    li.fragment Portable debugging tools
-    li.fragment Adoption
+    li.fragment Portable debugging tools!
+    li.fragment Adoption!
 
 section.center data-background="#0F0"
   h2 Case Study
@@ -510,6 +673,7 @@ section.center data-background-iframe="https://docs.python.org/3/reference/datam
 
 section.center
   a href="https://github.com/banister/binding_of_caller" binding_of_caller
+  = copyright "@banister", "https://github.com/banister/debug_inspector"
 
 section.center data-background="#000"
   h2.white Boogah
@@ -703,8 +867,11 @@ section.center
 section.center
   a href="https://github.com/gsamokovarov/boogah" gsamokovarov/boogah
 
+section.center data-background-iframe="/console"
+  a(href="#" class="navigate-next") &gt;
+
 section.center data-background="#000"
-  h2.white TL;DR
+  h2.white.fragment TL;DR
 
 section.center data-background="#000" data-background-transition="none"
   p.white Writing debuggers may seem daunting, but we have great APIs to do so.

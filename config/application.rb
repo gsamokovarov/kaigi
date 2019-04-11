@@ -15,6 +15,6 @@ module Kaigi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
-    config.rvt.command = '/bin/bash'
+    config.rvt.command = "PS1='kaigi 愛 ' /bin/bash"
   end
 end
