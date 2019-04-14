@@ -144,9 +144,6 @@ section.center
 section.center
   h2.fragment Byebug
 
-section.center data-background-iframe="/console"
-  a(href="#" class="navigate-next") &gt;
-
 section.center data-background="#000"
   p.white Interrupts the debugged program.
 
@@ -161,6 +158,9 @@ section.center data-background="#000" data-background-transition="none"
 
 section.center data-background="#000" data-background-transition="none"
   p.white Let's you step-over of method calls.
+
+section.center data-background-iframe="/console"
+  a(href="#" class="navigate-next") &gt;
 
 section.center
   h2 🙌
@@ -282,7 +282,7 @@ section.center
       }
 
 section.center
-  p Soft deprecated in favour of the more modern TracePoint API.
+  p Soft deprecated in favour of the more modern <span class="red">TracePoint</span> API.
 
 section.center data-background="#000"
   p.white.fragment Clearly, it's possible to write debuggers in Ruby...
@@ -312,7 +312,10 @@ section.center
   p Can listen only to specific events.
 
 section.center
-  p Can easily stop stracing the program.
+  p Can easily stop tracing the program.
+
+section.center
+  p Available in <span class="red">Ruby</span> and <span class="red">C</span>.
 
 section.center
   pre(contenteditable=true): code.ruby
@@ -394,27 +397,34 @@ section.center
   h2 🤔
 
 section.center data-background="#000"
-  h2.white ruby-debug
+  h2.white History
+
+section.center
+  h2 ruby-debug
 
 section.center
   p ruby-debug is a fast implementation of the standard debugger <span class="red">debug.rb</span>.
 
 section.center
-  p An old project, works for <span class="red">Ruby 1.8</span> and <span class="red">Ruby 1.9</span>.
+  p An old debugger, works for <span class="red">Ruby 1.8</span> and <span class="red">Ruby 1.9</span>.
 
 section.center data-background="#FFF"
   h3 Ruby 1.8
   a href="https://github.com/ruby-debug/ruby-debug" ruby-debug
 
-section.center data-background="#EEE"
+section.center data-background="#DDD"
   h3 Rewritten for Ruby 1.9
   a href="https://github.com/ruby-debug/ruby-debug-base19" ruby-debug-base-19
 
-section.center data-background="#DDD"
-  h3 Fork or ruby-debug-base for Ruby 2.x
-  a href="https://github.com/cldwalker/debugger" debugger
+section.center data-background="#BBB"
+  h3 Fork for Ruby 2.x ❓
+  a href="https://github.com/cldwalker/debugger" cldwalker/debugger
 
-section.center data-background="#CCC"
+section.center data-background="#999"
+  h3 Fork for Ruby 2.x 👌
+  a href="https://github.com/ko1/debugger" ko1/debugger
+
+section.center data-background="#777"
   h3 Unexported Ruby headers
   a href="https://github.com/cldwalker/debugger-ruby_core_source" debugger-ruby_core_source
 
@@ -464,6 +474,24 @@ section.center
 section.center
   pre(contenteditable=true): code.c
     '
+      static VALUE st_mSkiptrace;
+
+      static VALUE st_current_bindings(VALUE self)
+      {
+        return rb_debug_inspector_open(current_bindings_callback, NULL);
+      }
+
+      void Init_cruby(void)
+      {
+        st_mSkiptrace = rb_define_module("Skiptrace");
+
+        rb_define_singleton_method(st_mSkiptrace, "current_bindings", st_current_bindings, 0);
+      }
+  = copyright "skiptrace", "https://github.com/gsamokovarov/skiptrace"
+
+section.center
+  pre(contenteditable=true): code.c
+    '
       static VALUE
       current_bindings_callback(const rb_debug_inspector_t *context, void *data)
       {
@@ -481,15 +509,7 @@ section.center
 
         return bindings;
       }
-
-section.center
-  pre(contenteditable=true): code.c
-    '
-      static VALUE
-      current_bindings(void)
-      {
-        return rb_debug_inspector_open(current_bindings_callback, NULL);
-      }
+  = copyright "skiptrace", "https://github.com/gsamokovarov/skiptrace"
 
 section.center data-background="#000"
   h2.white High-level APIs
@@ -568,6 +588,7 @@ section.center
           p context.frame_class(i)
         end
       end
+  = copyright "debug_inspector", "https://github.com/banister/debug_inspector"
 
 section.center
   h2 👍
@@ -577,6 +598,42 @@ section.center
 
 section.center data-background-iframe="/error"
   a(href="#" class="navigate-next") &gt;
+
+section.center data-background="#00F"
+  h4.white Binding#caller
+
+section.center
+  a href="https://github.com/banister/binding_of_caller" binding_of_caller
+  = copyright "@banister", "https://github.com/banister/binding_of_caller"
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      def a
+        var = 10
+        b
+        puts var
+      end
+
+      def b
+        c
+      end
+
+      def c
+        binding.of_caller(2).eval('var = :hello')
+      end
+
+      a()
+
+      \# OUTPUT
+      \# => hello
+  = copyright "@banister", "https://github.com/banister/binding_of_caller"
+
+section.center
+  h2 👍
+
+section.center
+  h2 👎
 
 section.center data-background="#00F"
   h4.white Thread::Backtrace::Location#binding
@@ -636,7 +693,7 @@ section.center data-background="#000"
   p.white The APIs can be implemented by the VM maintainers.
 
 section.center data-background="#000" data-background-transition="none"
-  p.white The debuggers can become more or less UX work that is portable across VMs.
+  p.white The debuggers can become, more or less, UX work that is portable across VMs.
 
 section.center data-background="#000" data-background-transition="none"
   h2.white Pros & Cons
@@ -653,36 +710,17 @@ section.center
     li.fragment Portable debugging tools!
     li.fragment Adoption!
 
-section.center data-background="#0F0"
-  h2 Case Study
-
-section.center
-  img.inline src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Python_logo_and_wordmark.svg"
-
-section.center
-  a href="https://docs.python.org/3/library/sys.html?highlight=sys%20_getframe#sys._getframe" sys._getframe
-
-section.center
-  h2 😅
-
-section.center data-background-iframe="https://docs.python.org/3/library/sys.html?highlight=sys%20_getframe#sys._getframe"
-  a(href="#" class="navigate-next") &gt;
-
-section.center
-  a href="https://docs.python.org/3/reference/datamodel.html#frame-objects" Frame Objects
-
-section.center data-background-iframe="https://docs.python.org/3/reference/datamodel.html#frame-objects"
-  a(href="#" class="navigate-next") &gt;
-
-section.center
-  a href="https://github.com/banister/binding_of_caller" binding_of_caller
-  = copyright "@banister", "https://github.com/banister/debug_inspector"
-
 section.center data-background="#000"
-  h2.white Boogah
+  h2.white.fragment 👏
+
+section.center data-background="#000" data-background-transition="none"
+  h2.white 😎
+
+section.center data-background="#000" data-background-transition="none"
+  h2.white boogah
 
 section.center
-  p Proof of concept debugger written using the <span class="red">TracePoint API</span>.
+  p Proof of concept debugger written using the <span class="red">TracePoint API</span> in plain <span class="red">Ruby</span>.
 
 section.center
   p Not production ready, purely for educational purposes.
@@ -700,7 +738,7 @@ section.center
 section.center
   pre(contenteditable=true): code.ruby
     '
-      module Boogah::Context
+      class Boogah::Context
         attr_accessor :frames, :depth
 
         def initialize(*frames, depth: 0)
@@ -721,29 +759,7 @@ section.center
 section.center
   pre(contenteditable=true): code.ruby
     '
-      module Boogah::REPL
-        def initialize(binding)
-          IRB.setup(caller_locations.first.path, argv: [])
-
-          @binding = binding
-          @workspace = IRB::WorkSpace.new(@binding)
-          @irb = IRB::Irb.new(@workspace)
-        end
-
-        def start(context)
-          @binding.receiver.singleton_class.prepend(Boogah::Commands.new(context))
-          @irb.run(IRB.conf)
-        end
-
-        def stop
-          @irb.context.exit
-        end
-      end
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      module Boogah::REPL
+      class Boogah::REPL
         def initialize(binding)
           IRB.setup(caller_locations.first.path, argv: [])
 
@@ -783,7 +799,7 @@ section.center
           filename = block.call
           filename += ".rb" unless filename.end_with?(".rb")
 
-          block.binding.eval(current_directory.join(filename).read)
+          block.binding.eval current_directory.join(filename).read
         end
       end
 
