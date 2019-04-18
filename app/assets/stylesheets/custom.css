@@ -57,7 +57,7 @@
 }
 
 .reveal .shadow {
-  text-shadow: 1px 1px 2px invert(currentColor);
+  text-shadow: 1px 1px 2px #111;
 }
 
 .reveal .pixel {
