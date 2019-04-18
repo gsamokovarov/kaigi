@@ -6,13 +6,27 @@ section.center
 
 section.center
   img.inline src=image_path("me.png")
-  h2.fragment Genadi Samokovarov
+  h2 Genadi Samokovarov
 
 section.center
   h2 ゲナディ
+  span: p &nbsp;
 
 section.center data-background="#000"
   h2.white ゲナディ
+  span: p.white &nbsp;
+
+section.center data-background="#000"
+  h2.white <span class="red">ゲ</span>ナディ
+  span: p.white Ge
+
+section.center data-background="#000"
+  h2.white <span class="red">ゲナ</span>ディ
+  span: p.white Gena
+
+section.center data-background="#000"
+  h2.white <span class="red">ゲナ</span><del>ディ</del>
+  span: p.white Gena
 
 section.center
   a(href="https://twitter.com/gsamokovarov") twitter.com/gsamokovarov
@@ -56,13 +70,6 @@ section data-background="https://mir-s3-cdn-cf.behance.net/project_modules/fs/cd
 section data-background="https://mir-s3-cdn-cf.behance.net/project_modules/fs/47ba5e47510181.587d0008bf99e.jpg"
   h2.white.shadow НДК
   = copyright "Dimitar Karanikolov", "http://www.dimitarkaranikolov.com/"
-
-section data-background="https://upload.wikimedia.org/wikipedia/commons/5/52/20140622_Buzludzha_016.jpg"
-  h2.white.shadow Buzludzha
-  = copyright "Buzludzha monument", "https://en.wikipedia.org/wiki/Buzludzha_monument"
-
-section.center data-background-iframe="https://rubykaigi.org/2019/schedule"
-  a(href="#" class="navigate-next") &gt;
 
 section.center data-background="#000"
   h2.white.fragment Web Console
@@ -130,23 +137,20 @@ section.center
 section.center data-background-iframe="https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html"
   a(href="#" class="navigate-next") &gt;
 
-section.center data-background-iframe="/console"
-  a(href="#" class="navigate-next") &gt;
-
 section.center
   h2 Binding#pry
 
 section.center
   h2 Binding#irb
 
-section.center data-background-iframe="/console"
-  a(href="#" class="navigate-next") &gt;
-
 section.center
   h2 👌
 
 section.center
   h2.fragment Byebug
+
+section.center
+  a href="https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html" А Real Debugger! 😂
 
 section.center data-background="#000"
   p.white Interrupts the debugged program.
@@ -169,9 +173,6 @@ section.center data-background-iframe="/console"
 section.center
   h2 🙌
 
-section.center
-  a href="https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html" А Real Debugger! 😂
-
 section.center data-background="#000"
   h2.fragment.white debug.rb
 
@@ -179,10 +180,15 @@ section.center
   h2.fragment 🤚
 
 section.center
-  p Part of the standard library.
+  p Debugger in the standard library!
 
 section.center
   a href="https://github.com/ruby/ruby/blob/3db12e8b236ac8f88db8eb4690d10e4a3b8dbcd4/lib/debug.rb" Part of the initial CVS to SVN import during January 1998 🕔
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      require "debug"
 
 section.center
   p Written in plain Ruby!
@@ -190,16 +196,14 @@ section.center
 section.center data-background="#000"
   p.white Written in plain Ruby!
 
-section.center data-background="#000" data-background-transition="none"
+section.center data-background-iframe="/console"
+  a(href="#" class="navigate-next") &gt;
+
+section.center
   h2 😀
 
 section.center
   p Available everywhere.
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      require "debug"
 
 section.center
   p GDB like user-interface.
@@ -410,31 +414,31 @@ section.center
   p ruby-debug is a fast implementation of the standard debugger <span class="red">debug.rb</span>.
 
 section.center
-  p An old debugger, works for <span class="red">Ruby 1.8</span> and <span class="red">Ruby 1.9</span>.
+  p An old debugger for <span class="red">Ruby 1.8</span> and, eventually, <span class="red">Ruby 1.9</span>.
 
 section.center data-background="#FFF"
   h3 Ruby 1.8
-  a href="https://github.com/ruby-debug/ruby-debug" ruby-debug
+  a href="https://github.com/ruby-debug/ruby-debug" github.com/ruby-debug/ruby-debug
 
 section.center data-background="#DDD"
   h3 Rewritten for Ruby 1.9
-  a href="https://github.com/ruby-debug/ruby-debug-base19" ruby-debug-base-19
+  a href="https://github.com/ruby-debug/ruby-debug-base19" github.com/ruby-debug/ruby-debug-base-19
 
 section.center data-background="#BBB"
   h3 Fork for Ruby 2.x ❓
-  a href="https://github.com/cldwalker/debugger" cldwalker/debugger
+  a href="https://github.com/cldwalker/debugger" github.com/ruby-debug/cldwalker/debugger
 
 section.center data-background="#999"
   h3 Fork for Ruby 2.x 👌
-  a href="https://github.com/ko1/debugger2" ko1/debugger2
+  a href="https://github.com/ko1/debugger2" github.com/ruby-debug/ko1/debugger2
 
 section.center data-background="#777"
   h3 Rewrite for Ruby 2.x 👌
-  a href="https://github.com/denofevil/debase" denofevil/debase
+  a href="https://github.com/denofevil/debase" github.com/denofevil/debase
 
 section.center data-background="#555"
   h3 Unexported Ruby headers
-  a href="https://github.com/cldwalker/debugger-ruby_core_source" debugger-ruby_core_source
+  a href="https://github.com/cldwalker/debugger-ruby_core_source" github.com/cldwalker/debugger-ruby_core_source
 
 section.center
   p.fragment The <span class="red">TracePoint API</span> solves most of the problems that sprouted the existence of <span class="red">ruby-debug</span>.
@@ -452,10 +456,47 @@ section.center data-background="#F00"
   h2.white Pry-open the VM stack frames
 
 section.center
-  p Kernel#caller
+  h3 Kernel#caller
+  p.red Array[String]
 
 section.center
-  p Kernel#caller_locations
+  pre(contenteditable=true): code
+    '
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/workspace.rb:85:in `eval'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/workspace.rb:85:in `evaluate'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/context.rb:385:in `evaluate'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:493:in `block (2 levels) in eval_input'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:647:in `signal_status'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:490:in `block in eval_input'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/ruby-lex.rb:246:in `block (2 levels) in each_top_level_statement'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/ruby-lex.rb:232:in `loop'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/ruby-lex.rb:232:in `block in each_top_level_statement'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/ruby-lex.rb:231:in `catch'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb/ruby-lex.rb:231:in `each_top_level_statement'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:489:in `eval_input'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:428:in `block in run'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:427:in `catch'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:427:in `run'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/2.6.0/irb.rb:383:in `start'
+      /Users/genadi/.rbenv/versions/2.6.2/lib/ruby/gems/2.6.0/gems/irb-1.0.0/exe/irb:11:in `top (required)'
+      /Users/genadi/.rbenv/versions/2.6.2/bin/irb:23:in `load'
+      /Users/genadi/.rbenv/versions/2.6.2/bin/irb:23:in `main'
+
+section.center
+  h3 Kernel#caller_locations
+  p.red Array[Thread::Backtrace::Location]
+
+section.center
+  pre(contenteditable=true): code
+    '
+      . Thread::Backtrace::Location#absolute_path
+      . Thread::Backtrace::Location#label
+      . Thread::Backtrace::Location#base_label
+      . Thread::Backtrace::Location#lineno
+      . Thread::Backtrace::Location#path
+
+section.center
+  p Read-only, presentational APIs.
 
 section.center data-background="#000"
   h2.white Debug Inspector API
@@ -532,13 +573,13 @@ section.center
   h2 🤔
 
 section.center
-  p Why not make it official?
+  p Why not expose them to Ruby?
 
 section.center data-background="#00F"
   h4.white DebugInspector#open
 
 section.center
-  a href="https://github.com/banister/debug_inspector" debug_inspector
+  a href="https://github.com/banister/debug_inspector" github.com/banister/debug_inspector
   = copyright "@banister", "https://github.com/banister/debug_inspector"
 
 section.center
@@ -564,45 +605,10 @@ section.center
   = copyright "debug_inspector", "https://github.com/banister/debug_inspector"
 
 section.center
-  pre(contenteditable=true): code.c
-    '
-      typedef struct rb_debug_inspector_struct rb_debug_inspector_t;
-      typedef VALUE (*rb_debug_inspector_func_t)(const rb_debug_inspector_t *, void *);
-
-      VALUE rb_debug_inspector_open(rb_debug_inspector_func_t func, void *data);
-      VALUE rb_debug_inspector_frame_self_get(const rb_debug_inspector_t *dc, long index);
-      VALUE rb_debug_inspector_frame_class_get(const rb_debug_inspector_t *dc, long index);
-      VALUE rb_debug_inspector_frame_binding_get(const rb_debug_inspector_t *dc, long index);
-      VALUE rb_debug_inspector_frame_iseq_get(const rb_debug_inspector_t *dc, long index);
-      VALUE rb_debug_inspector_backtrace_locations(const rb_debug_inspector_t *dc);
-  = copyright "debug_inspector", "https://github.com/banister/debug_inspector"
+  h2 😀
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      require 'debug_inspector'
-
-      DebugInspector.open do |context|
-        locations = context.backtrace_locations
-
-        locations.size.times do |i|
-          # binding of i-th caller frame (returns a Binding object or nil)
-          p context.frame_binding(i)
-
-          # iseq of i-th caller frame (returns a RubyVM::InstructionSequence object or nil)
-          p context.frame_iseq(i)
-
-          # class of i-th caller frame
-          p context.frame_class(i)
-        end
-      end
-  = copyright "debug_inspector", "https://github.com/banister/debug_inspector"
-
-section.center
-  h2 👍
-
-section.center
-  h2 👎
+  h2 ☹️
 
 section.center data-background-iframe="/error"
   a(href="#" class="navigate-next") &gt;
@@ -611,7 +617,7 @@ section.center data-background="#00F"
   h4.white Binding#caller
 
 section.center
-  a href="https://github.com/banister/binding_of_caller" binding_of_caller
+  a href="https://github.com/banister/binding_of_caller" github.com/banister/binding_of_caller
   = copyright "@banister", "https://github.com/banister/binding_of_caller"
 
 section.center
@@ -638,16 +644,16 @@ section.center
   = copyright "@banister", "https://github.com/banister/binding_of_caller"
 
 section.center
-  h2 👍
+  h2 😀
 
 section.center
-  h2 👎
+  h2 ☹️
 
 section.center data-background="#00F"
   h4.white Thread::Backtrace::Location#binding
 
 section.center
-  p A suggestion by <a href="https://twitter.com/tom_enebo">@tom_enebo</a> at Kaigi 2018.
+  p A suggestion by <a href="https://twitter.com/tom_enebo">@tom_enebo</a> from RubyKaigi 2018.
 
 section.center
   pre(contenteditable=true): code.ruby
@@ -695,7 +701,7 @@ section.center
       end
 
 section.center
-  h2 👍
+  h2 😀
 
 section.center data-background="#000"
   p.white The APIs can be implemented by the VM maintainers.
@@ -719,7 +725,7 @@ section.center
     li.fragment Adoption!
 
 section.center data-background="#000"
-  h2.white.fragment 👏
+  h2.white.fragment 🤲
 
 section.center data-background="#000" data-background-transition="none"
   h2.white 😎
@@ -733,8 +739,11 @@ section.center
 section.center
   p Not production ready, purely for educational purposes.
 
+section.center data-background-iframe="/console"
+  a(href="#" class="navigate-next") &gt;
+
 section.center
-  pre(contenteditable=true): code.ruby
+  pre.fragment(contenteditable=true): code.ruby
     '
       class Binding
         def boogah
@@ -789,7 +798,7 @@ section.center
 section.center
   pre(contenteditable=true): code.ruby
     '
-      module Boogah::Commands < Module
+      class Boogah::Commands < Module
         def initialize(current)
           Dir.each_child current_directory.join("commands") do |cmd|
             require_command { "commands/\#{cmd}" }
@@ -892,10 +901,8 @@ section.center
       end
 
 section.center
-  a href="https://github.com/gsamokovarov/boogah" gsamokovarov/boogah
-
-section.center data-background-iframe="/console"
-  a(href="#" class="navigate-next") &gt;
+  a href="https://github.com/gsamokovarov/boogah" github.com/gsamokovarov/boogah
+  p gem install boogah
 
 section.center data-background="#000"
   h2.white.fragment TL;DR
