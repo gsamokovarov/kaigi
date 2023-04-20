@@ -12,5 +12,4 @@
 //
 //= require rails-ujs
 //= require reveal.js/js/reveal.js
-//= require reveal.js/lib/js/head.min.js
 //= require_tree .
