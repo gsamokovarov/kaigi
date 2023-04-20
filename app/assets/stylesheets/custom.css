@@ -1,26 +1,14 @@
-.reveal .white {
-  color: #FFFFFF;
-}
+.reveal .white { color: #FFFFFF; }
+.reveal .gray { color: #777; }
+.reveal .red { color: #F00; }
+.reveal .black { color: #000; }
 
-.reveal .gray {
-  color: #777;
-}
+.reveal .big { font-size: 1.9em; }
 
-.reveal .red {
-  color: #F00;
-}
+.reveal .shadow { text-shadow: 1px 1px 2px #111; }
 
-.reveal .black {
-  color: #000;
-}
-
-.reveal .big {
-  font-size: 1.9em;
-}
-
-.reveal pre.inline {
-  box-shadow: none;
-}
+.reveal pre code { max-height: none; }
+.reveal pre.inline { box-shadow: none; }
 
 .reveal img.inline {
   background: transparent;
@@ -30,35 +18,16 @@
   vertical-align: middle;
 }
 
-.reveal a.image {
-  text-decoration: none;
-}
+.reveal a.image { text-decoration: none; }
+.reveal a:hover img.inline { background: transparent; border: 0; box-shadow: none; }
 
-.reveal a:hover img.inline {
-  background: transparent;
-  border: 0;
-  box-shadow: none;
-}
+.reveal .left { float: left; }
+.reveal .right { float: right; }
 
-.reveal .left {
-  float: left;
-}
 
-.reveal .right {
-  float: right;
-}
+.reveal .left-aligned-text { margin-left: 30%; text-align: left }
 
-.reveal .hidden {
-  visibility: hidden;
-}
-
-.reveal pre code {
-  max-height: none;
-}
-
-.reveal .shadow {
-  text-shadow: 1px 1px 2px #111;
-}
+.reveal .hidden { visibility: hidden; }
 
 .reveal .pixel {
   font-family: DOS, Monaco, Menlo, Consolas, "Courier New", monospace;
@@ -73,19 +42,8 @@
   padding: 0.2em !important;
 }
 
-.copyright a {
-  display: block;
-  color: light;
-  font-size: 0.5em;
-}
+.copyright a { display: block; color: light; font-size: 0.5em; }
 
-pre {
-  font-size: 24px !important;
-  text-align: left !important;
-}
+pre { font-size: 24px !important; text-align: left !important; }
 
-a.navigate-next {
-  position: fixed;
-  top: 1em;
-  right: 1em;
-}
+a.navigate-next { position: fixed; top: 1em; right: 1em; }
