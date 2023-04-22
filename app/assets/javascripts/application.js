@@ -13,3 +13,45 @@
 //= require rails-ujs
 //= require reveal.js/js/reveal.js
 //= require_tree .
+
+function parseRuby() {
+	document.querySelectorAll('.js-parse-ruby').forEach(pre => {
+		const button = document.createElement('button')
+		button.textContent = 'Parse'
+
+		button.addEventListener('click', () => {
+			const code = pre.querySelector("code").textContent
+			const response = fetch("/parsers", {
+				method: "POST",
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({code})
+			}).then(response => {
+				response.json().then(rubyAST => {
+					const anotherCode = document.createElement('code')
+					anotherCode.className = 'lisp'
+					anotherCode.textContent = rubyAST.code
+
+					const anotherPre = document.createElement('pre')
+					anotherCode.className = 'parsed-code'
+					anotherPre.contentEditable = true
+					anotherPre.appendChild(anotherCode)
+					anotherPre.style.background = '#ededed'
+					anotherPre.style.padding = '.5em'
+
+					pre.nextSibling?.remove()
+					pre.parentNode.appendChild(anotherPre)
+					hljs.highlightBlock(anotherPre)
+				})
+			})
+		})
+
+		pre.insertBefore(button, pre.firstChild)
+	})
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+	parseRuby()
+})

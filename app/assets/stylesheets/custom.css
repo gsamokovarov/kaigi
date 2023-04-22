@@ -44,6 +44,25 @@
 
 .copyright a { display: block; color: light; font-size: 0.5em; }
 
-pre { font-size: 24px !important; text-align: left !important; }
+pre {
+  position: relative;
+  font-size: 24px !important; 
+  text-align:
+  left !important;
+}
+
+pre > button {
+  position: absolute;
+  bottom: 0;
+  right: 1em;
+  padding: 0.2em;
+  background: red;
+  color: white;
+  border: none;
+  font-size: 24px;
+}
+pre > button:active { transform: translateY(.2em); }
+pre > button:disabled { background: gray; pointer-events: none; }
 
 a.navigate-next { position: fixed; top: 1em; right: 1em; }
+[contenteditable] { outline: none; }
