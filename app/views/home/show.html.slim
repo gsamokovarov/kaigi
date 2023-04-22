@@ -1,5 +1,5 @@
 section.center
-  h1 Rubocop's Baddest Cop
+  h1 RuboCop's Baddest Cop
   img.inline src=image_path("rubo-logo-horizontal.png") width="400px"
 
 section.center
@@ -95,7 +95,7 @@ section.center
       end
 
 section.center
-  img.inline src=image_path("example1.png") width="100%"
+  img.inline src=image_path("example1.png") width="80%"
 
 section.center
   img.inline src=image_path("rubo-logo-horizontal.png") width="400px"
@@ -318,6 +318,51 @@ section.center
 section.center
   pre(contenteditable=true): code.ruby
     '
+      [
+        Stat.new("Users Today") do
+          User.today.count
+        end,
+        Stat.new("Servers Today") do
+          Server.today.count
+        end
+      ]
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      render json: FieldSearch.with(search_params).map(&method(:serialize))
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      foo(/a*b*/)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      foo(/a*b*/)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      def regular(arg = default(42))
+        nil
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      def foo(bar: baz(42))
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      ConstantLikeMethod()
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
       proc_call_syntax.(:proc, :arguments)
 
 section.center
@@ -333,4 +378,169 @@ section.center
 section.center
   pre(contenteditable=true): code.ruby
     '
+      foo({hash: literal_anywhere_as_argument})
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      hash.should eq({})
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      call(value_omission_as_last_argument:)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      call(...)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      if success = destroy_remote(server)
+        delete server
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      def oneliner = any_method_call(with_arguments)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      yield path, File.basename(path)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      class Point < Struct.new(:x, :y); end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      1..limit(n)
+      1...limit(n)
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
       foo().bar(3).wait(4) + 4
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      foo(a) && bar(b)
+      foo(a) || bar(b)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      method(*args)
+      method(**kwargs)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      foo.include?(bar) ? bar : quux
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      foo(-1)
+      foo(+1)
+      foo(-"")
+      foo(+"")
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      data&.[](value)
+      value.===(other)
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      foo bar:
+      42
+
+section.center
+  a href="https://bugs.ruby-lang.org/issues/18396" An unexpected "hash value omission" syntax error when without parentheses call expr follows
+
+section.center data-background="#000"
+  h2.white.fragment VALUE <span class="fragment">OMISSION</span> <span class="fragment">SYNTAX</span>
+  p.white.fragment without parentheses
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      create :integration_shop, account:, user: non_omitted_user # 👑
+      pass
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      create :integration_shop, account:, user: # 🤮
+      pass
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      if condition?
+        raise Error.new 'A long error message...', foo: # 👑
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      if condition?
+        raise Error.new 'A long error message...', foo: if condition # 🤮
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      if condition?
+        raise Error.new('A long error message...', foo:) if condition # 👑
+      end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      var =
+        unless object.action value:, other:
+          condition || other_condition
+        end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      var =
+        unless object.action value:, other: # 😖
+          condition || other_condition
+        end
+
+section.center
+  pre(contenteditable=true): code.ruby
+    '
+      var =
+        unless object.action value:, other: condition || other_condition # 🤦
+        end
+      # => nil
+
+section.center
+  p Value omission syntax without parantheses is tricky!
+
+section.center data-background="#000"
+  h2.white whitequark/parser
+
+section.center data-background="#000"
+  h2.white ruby-parse
+
+section.center
+  p Invaluable tool for RuboCop development!
+
