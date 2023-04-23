@@ -187,24 +187,67 @@ section.center
 section.center
   h2 Agenda
   ol.left-aligned-text
-    li Ruby syntax quirks
     li whitequark/parser (ruby-parse)
+    li Ruby method dispatch
     li RuboCop development basics
 
 section.center data-background="#000"
-  h2.white Method calls in <span class="red">Ruby</span>
+  h2.white Method dispatch <span class="red">Ruby</span>
+
+section.center
+  p Method calls in <span class="red">Ruby</span>?
 
 section.center data-background="#000"
-  h2.white <del>Method calls</del> in <span class="red">Ruby</span>
+  p <del>Method calls</del> in <span class="red">Ruby</span>!?
 
 section.center data-background="#000"
-  h2.white Message sending in <span class="red">Ruby</span>
+  p Message sending in <span class="red">Ruby</span>!
+
+section.center
+  ruby:
+    Kernel.puts "Oh, hi Mark!"
+
+section.center
+  p Messages are sent to objects, or receivers
+
+section.center
+  p Receivers are the object we sent the message to
+
+section.center
+  p Receivers can be implicit
 
 section.center
   ruby:
     puts "Oh, hi Mark!"
 
-section.center data-background="#000"
+section.center
+  ruby:
+    self.puts "Oh, hi Mark!"
+
+section.center
+  p Blocks can be attached to messages
+
+section.center
+  ruby:
+    3.times { puts "Hip, hip, hooray!" }
+
+section.center
+  p <del>Blocks can be attached to messages</del>
+
+section.center
+  p Messages can be attached to blocks!?
+  p.fragment= "(at least for the parser)"
+
+section.center
+  p Messages can be chained
+
+section.center
+  ruby:
+    attendees.sample(50).each do |attendee|
+      TrainTicket.book train, attendee:
+    end
+
+section.center
   h2.white <span class="red">Ruby</span> <span class="fragment"> syntax quirks</span>
 
 section.center
