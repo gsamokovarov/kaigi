@@ -21,7 +21,7 @@ function parseRuby() {
 
 		button.addEventListener('click', () => {
 			const code = pre.querySelector("code").textContent
-			const response = fetch("/parsers", {
+			fetch("/parsers", {
 				method: "POST",
 				headers: {
 					'Accept': 'application/json',
@@ -43,7 +43,9 @@ function parseRuby() {
 
 					pre.nextSibling?.remove()
 					pre.parentNode.appendChild(anotherPre)
+
 					hljs.highlightBlock(anotherPre)
+					Reveal.layout()
 				})
 			})
 		})
