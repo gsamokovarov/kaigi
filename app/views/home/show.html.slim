@@ -28,11 +28,21 @@ section.center data-background="#000"
   h2.white <span class="red">ゲナ</span><del>ディ</del>
   span: p.white Gena
 
-section.center
-  a(href="https://twitter.com/gsamokovarov") twitter.com/gsamokovarov
+section.center 
+  a(href="https://github.com/gsamokovarov") github.com/gsamokovarov
+
+section.center data-background="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Bulgaria.svg/2000px-Flag_of_Bulgaria.svg.png"
+  h2.white.shadow Bulgaria
+  = copyright "Wikipedia", "https://en.wikipedia.org/wiki/Bulgaria"
+
+section.center data-background="#e03647"
+  img class="inline" width="200px" src=image_path("ruby_banitsa_logo.svg")
+  p: a.white(href="https://rubybanitsa.com") rubybanitsa.com
 
 section.center
-  a(href="https://github.com/gsamokovarov") github.com/gsamokovarov
+  p
+    img class="inline" width="30%" src=image_path("rails_logo.svg")
+    img class="inline" width="30%" src=image_path("rubo-logo-horizontal.png")
 
 section.center
   a href="https://dext.com"
@@ -57,9 +67,10 @@ section.center
   span
     img.inline width="20%" src=image_path("me.png")
     img.inline width="20%" src="https://www.ruby-lang.org/images/header-ruby-logo@2x.png"
+  p.fragment 10 years of Ruby development!
 
-section.center
-  h1 10 years of Ruby anniversary!
+section.center data-background="#000"
+  p.white.fragment BUT...
 
 section.center data-background="#007d9c"
   a href="https://go.dev"
@@ -70,6 +81,17 @@ section.center data-background="#007d9c"
 
 section.center data-background="#007d9c"
   img.inline src=image_path("mario_crown.png") width="200px"
+
+section.center data-background=image_path("trakia_vakarel.jpg")
+  h1.white.shadow Side note
+
+section.center
+  a href="https://github.com/gsamokovarov/jump" gsamokovarov/jump
+  p $ brew install jump
+
+section.center
+  img.inline src=image_path("jump_demo.svg")
+  p $ brew install jump
 
 section.center
   a.fragment href="https://dext.com"
@@ -115,8 +137,40 @@ section.center
 section.center
   img.inline src=image_path("mario_crown.png") width="200px"
 
+section.center
+  pre(contenteditable=true): code.yml
+    '
+      Style/MethodCallWithArgsParentheses:
+        Description: 'Use parentheses for method calls with arguments.'
+        StyleGuide: '#method-invocation-parens'
+        Enabled: false
+        VersionAdded: '0.47'
+        VersionChanged: '1.7'
+        IgnoreMacros: true
+        AllowedMethods: []
+        AllowedPatterns: []
+        IncludedMacros: []
+        AllowParenthesesInMultilineCall: false
+        AllowParenthesesInChaining: false
+        AllowParenthesesInCamelCaseMethod: false
+        AllowParenthesesInStringInterpolation: false
+        EnforcedStyle: require_parentheses
+        SupportedStyles:
+          - require_parentheses
+          - omit_parentheses
+
+section.center
+  pre(contenteditable=true): code.yml
+    '
+      Style/MethodCallWithArgsParentheses:
+        EnforcedStyle: omit_parentheses
+        AllowParenthesesInMultilineCall: false
+        AllowParenthesesInChaining: true
+        AllowParenthesesInCamelCaseMethod: false
+        AllowParenthesesInStringInterpolation: false
+
 section.center data-background=image_path("trakia_vakarel.jpg")
-  h1.white.shadow BY THE WAY
+  h1.white.shadow Side note
 
 section.center
   ruby:
@@ -165,28 +219,6 @@ section.center data-background=image_path("bulgarian_style.jpg")
 
 section.center data-background="#000"
   h2.white.fragment RuboCop's Baddest Cop
-
-section.center
-  pre(contenteditable=true): code.yml
-    '
-      Style/MethodCallWithArgsParentheses:
-        Description: 'Use parentheses for method calls with arguments.'
-        StyleGuide: '#method-invocation-parens'
-        Enabled: false
-        VersionAdded: '0.47'
-        VersionChanged: '1.7'
-        IgnoreMacros: true
-        AllowedMethods: []
-        AllowedPatterns: []
-        IncludedMacros: []
-        AllowParenthesesInMultilineCall: false
-        AllowParenthesesInChaining: false
-        AllowParenthesesInCamelCaseMethod: false
-        AllowParenthesesInStringInterpolation: false
-        EnforcedStyle: require_parentheses
-        SupportedStyles:
-          - require_parentheses
-          - omit_parentheses
 
 section.center
   pre(contenteditable=true): code.yml

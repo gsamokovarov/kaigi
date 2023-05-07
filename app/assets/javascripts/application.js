@@ -23,10 +23,7 @@ function parseRuby() {
 			const code = pre.querySelector("code").textContent
 			fetch("/parsers", {
 				method: "POST",
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
+				headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
 				body: JSON.stringify({code})
 			}).then(response => {
 				response.json().then(rubyAST => {

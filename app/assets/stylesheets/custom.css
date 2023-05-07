@@ -1,13 +1,16 @@
-.reveal .white { color: #FFFFFF; }
+.reveal .white { color: #fff; }
 .reveal .gray { color: #777; }
 .reveal .red { color: #F00; }
 .reveal .black { color: #000; }
+
+/* Bump CSS specificity for this particular selector. */
+.reveal a.white:not(.image) { color: #fff; }
 
 .reveal .big { font-size: 1.9em; }
 
 .reveal .shadow { text-shadow: 1px 1px 2px #111; }
 
-.reveal pre code { max-height: none; }
+.reveal pre > code { max-height: none; }
 .reveal pre.inline { box-shadow: none; }
 
 .reveal img.inline {
@@ -23,7 +26,6 @@
 
 .reveal .left { float: left; }
 .reveal .right { float: right; }
-
 
 .reveal .left-aligned-text { margin-left: 30%; text-align: left }
 
