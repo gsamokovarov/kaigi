@@ -86,7 +86,7 @@ section.center data-background=image_path("trakia_vakarel.jpg")
   h1.white.shadow Side note
 
 section.center
-  a href="https://github.com/gsamokovarov/jump" gsamokovarov/jump
+  a href="https://github.com/gsamokovarov/jump" github.com/gsamokovarov/jump
   p $ brew install jump
 
 section.center
@@ -130,6 +130,10 @@ section.center
         end
       end
     end
+
+section.center data-background=image_path("devs_doing_code_review.jpeg")
+  blockquote.white.fragment
+    p.shadow Cut the parens
 
 section.center
   img.inline src=image_path("rubo-logo-horizontal.png") width="400px"
@@ -231,11 +235,34 @@ section.center
         AllowParenthesesInStringInterpolation: false
 
 section.center
+  a(href="https://github.com/rubocop/rubocop/pull/6469") rubocop#6469
+  p.fragment
+    a(href="https://github.com/rubocop/rubocop/releases/tag/v0.61.0") 0.61.0
+  p.fragment
+    date Dec 5, 2018
+
+section.center
+  h2 Credits
+  ul.left-aligned-text.styled
+    li: a(href="https://github.com/gsamokovarov") Genadi Samokovarov (@gsamokovarov)
+    li: a(href="https://github.com/bbatsov") Bozhidar Batsov (@bbatsov)
+    li: a(href="https://github.com/buehmann") Andreas Bühmann (@buehmann)
+    li: a(href="https://github.com/koic") Koichi ITO (@koic)
+    li: a(href="https://github.com/dvandersluis") Daniel Vandersluis (@dvandersluis)
+    li Others
+
+section.center
   h2 Agenda
-  ol.left-aligned-text
-    li whitequark/parser
-    li Method dispatch parsing 101
-    li RuboCop development basics
+  ul.left-aligned-text.styled
+    li.fragment whitequark/parser
+    li.fragment Method dispatch parsing
+    li.fragment RuboCop development
+
+section.center
+  h2 Agenda
+  ul.left-aligned-text.styled
+    li.fragment Style/MethodCallWithArgsParentheses (EnforcedStyle: omit_parentheses)
+    li.fragment Style/HashSyntax (EnforcedShorthandSyntax: always)
 
 section.center data-background="#000"
   h2.white whitequark/parser
