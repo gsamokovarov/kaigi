@@ -530,7 +530,7 @@ section.center
     foo(/a*b*/) # 👑
 
 section.center data-background="#000"
-  p.white When it is <strong>required</strong> to omit parentheses in Ruby?
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
 
 section.center
   ruby:
@@ -636,6 +636,201 @@ section.center
     #    ^^^^^^^^^^ Omit parentheses for method calls with arguments.
     #
 
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6763") rubocop#6763
+  p.white.fragment Allow parens for calls in range literals (Style/MethodCallWithArgsParentheses)
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    1..limit(n)
+    #       ^^^ Omit parentheses for method calls with arguments.
+    1...limit(n)
+    #        ^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  ruby:
+    1..limit(n) # 👑
+    1...limit(n) # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6765") rubocop#6765
+  p.white.fragment Allow parens for optional keyword value calls in Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    def foo(bar: baz(42))
+    #           ^^^^ Omit parentheses for method calls with arguments.
+    end
+
+section.center
+  ruby:
+    def foo(bar: baz(42)) # 👑
+    end
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/7107") rubocop#7107
+  p.white.fragment Allow parens for optional keyword value calls in Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    foo(-1)
+    #  ^^^^ Omit parentheses for method calls with arguments.
+    foo(+1)
+    #  ^^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  ruby:
+    foo(-1) # 👑
+    foo(+1) # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/8346") rubocop#8346
+  p.white.fragment Allow parentheses in single-line inheritance
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    class Point < Struct.new(:x, :y); end
+    #                       ^^^^^^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  ruby:
+    class Point < Struct.new(:x, :y); end # 👑
+
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/9620") rubocop#9620
+  p.white.fragment Allow parentheses in operator method calls for Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>subjective</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    data&.[](value)
+    #       ^^^^^^^ Omit parentheses for method calls with arguments.
+    value.===(other)
+    #        ^^^^^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  ruby:
+    data&.[](value) # 👑
+    value.===(other) # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/9625") rubocop#9625
+  p.white.fragment Allow parentheses in yield arguments for Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    yield path, File.basename(path)
+    #           ^^^^^^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  ruby:
+    yield path, File.basename(path) # 👑;we
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/9629") rubocop#9629
+  p.white.fragment Calls with braces in interpolation for Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>subjective</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    "#{part(1)}, #{part(2)}, #{part(3)}"
+    #                              ^^^^ Omit parentheses for method calls with arguments.
+    #                  ^^^ Omit parentheses for method calls with arguments.
+    #      ^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  pre(contenteditable=true): code.yml
+    '
+      Style/MethodCallWithArgsParentheses:
+        EnforcedStyle: omit_parentheses
+        AllowParenthesesInStringInterpolation: true
+
+section.center
+  ruby:
+    "#{part(1)}, #{part(2)}, #{part(3)}" # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/9637") rubocop#9637
+  p.white.fragment Parenthesized forwarded args in Style/MethodCallWithArgsParentheses omit_parentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    def delegated_call(...)
+      @proxy.call(...)
+      #          ^^^^^ Omit parentheses for method calls with arguments.
+    end
+
+section.center
+  p Removing the parens will start an endless range with the beginning being the result of the method call without arguments.
+
+section.center
+  ruby:
+    def delegated_call(...)
+      @proxy.call(...) # 👑
+    end
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/9854") rubocop#9854
+  p.white.fragment Allow braced numeric block calls in Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    updated_ids = Set.new(items_to_update) { _1.remote_id.to_s }
+    #                    ^^^^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  p We have new AST block type (numblock) for blocks with numeric arguments.
+
+section.center
+  ruby:
+    updated_ids = Set.new(items_to_update) { _1.remote_id.to_s } # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/10982") rubocop#10982
+  p.white.fragment Do not omit parentheses for calls in assignments in conditional branches
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    if success = destroy_remote(server)
+      #                        ^^^^^^^^ Omit parentheses for method calls with arguments.
+      delete server
+    end
+
+section.center
+  ruby:
+    if success = destroy_remote(server) # 👑
+      delete server
+    end
+
 section.center
   pre(contenteditable=true): code.ruby
     '
@@ -732,14 +927,6 @@ section.center
   pre(contenteditable=true): code.ruby
     '
       foo().bar(3).wait(4) + 4
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo(-1)
-      foo(+1)
-      foo(-"")
-      foo(+"")
 
 section.center
   pre(contenteditable=true): code.ruby

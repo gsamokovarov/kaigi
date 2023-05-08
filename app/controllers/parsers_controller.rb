@@ -8,5 +8,7 @@ class ParsersController < ApplicationController
     code = ast.inspect
 
     render json: { code: }
+  rescue => err
+    render json: { code: err }
   end
 end

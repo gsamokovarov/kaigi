@@ -6,10 +6,13 @@
 /* Bump CSS specificity for this particular selector. */
 .reveal a.white:not(.image) { color: #fff; }
 
+.reveal .white strong { font-weight: bolder; color: red; }
+
 .reveal .big { font-size: 1.9em; }
 
 .reveal .shadow { text-shadow: 1px 1px 2px #111; }
 
+.reveal pre { overflow: scroll; }
 .reveal pre > code { max-height: none; }
 .reveal pre.inline { box-shadow: none; }
 
