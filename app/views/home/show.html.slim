@@ -261,8 +261,8 @@ section.center
 section.center
   h2 Agenda
   ul.left-aligned-text.styled
-    li.fragment Style/MethodCallWithArgsParentheses (EnforcedStyle: omit_parentheses)
-    li.fragment Style/HashSyntax (EnforcedShorthandSyntax: always)
+    li.fragment Style/MethodCallWithArgsParentheses <br> EnforcedStyle: omit_parentheses
+    li.fragment Style/HashSyntax <br> EnforcedShorthandSyntax: always
 
 section.center data-background="#000"
   h2.white whitequark/parser
@@ -307,128 +307,334 @@ section.center
       TrainTicket.book train, attendee:
     end
 
-section.center
-  h2.white <span class="red">Ruby</span> <span class="fragment"> syntax quirks</span>
+section.center data-background="#000"
+  p.white When can we <strong>can</strong> omit parentheses in Ruby?
 
 section.center
-  p When can we <strong>can</strong> omit parentheses in Ruby?
+  ruby:
+    test()
+    #   ^^ Omit parentheses for method calls with arguments.
+    #
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test()
-          ^^ Omit parentheses for method calls with arguments.
+  ruby:
+    test # 👑
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test # 👑
+  ruby:
+    Array(list)
+    #    ^^^^^^ Omit parentheses for method calls with arguments.
+    #
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      Array(list)
-           ^^^^^^ Omit parentheses for method calls with arguments.
+  ruby:
+    Array list # 👑
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      Array list # 👑
+  ruby:
+    test(foo: bar)
+    #   ^^^^^^^^^^ Omit parentheses for method calls with arguments.
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test(foo: bar)
-          ^^^^^^^^^^ Omit parentheses for method calls with arguments.
+  ruby:
+    test foo: bar # 👑
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test foo: bar # 👑
+  ruby:
+    test(
+    #   ^ Omit parentheses for method calls with arguments.
+      foo: bar
+      quux: baz
+    )
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test(
-          ^ Omit parentheses for method calls with arguments.
-        foo: bar
-        quux: baz
-      )
+  ruby:
+    test foo: bar,
+         quux: baz # 👑
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test foo: bar,
-           quux: baz # 👑
+  ruby:
+    def method(arg)
+      super(arg)
+      #    ^^^^^ Omit parentheses for method calls with arguments.
+    end
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      def method(arg)
-        super(arg)
-             ^^^^^ Omit parentheses for method calls with arguments.
-      end
+  ruby:
+    def method(arg)
+      super arg # 👑
+    end
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      def method(arg)
-        super arg # 👑
-      end
+  ruby:
+    yield(:arg)
+    #    ^^^^^^ Omit parentheses for method calls with arguments.
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      yield(:arg)
-           ^^^^^^ Omit parentheses for method calls with arguments.
+  ruby:
+    yield :arg # 👑
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      yield :arg # 👑
+  ruby:
+    foo().bar(3).wait(4)
+    #                ^^^ Omit parentheses for method calls with arguments.
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo().bar(3).wait(4)
-                       ^^^ Omit parentheses for method calls with arguments.
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo().bar(3).wait 4 # 👑
+  ruby:
+    foo().bar(3).wait 4 # 👑
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo(:arg) do
-         ^^^^^^ Omit parentheses for method calls with arguments.
-        bar
-      end
+  ruby:
+    foo(:arg) do
+    #  ^^^^^^ Omit parentheses for method calls with arguments.
+      bar
+    end
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo :arg do # 👑
-        bar
-      end
+  ruby:
+    foo :arg do # 👑
+      bar
+    end
 
 section.center data-background="#000"
   p.white When can we <strong>cannot</strong> omit parentheses in Ruby?
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test 1, 2, arg: calc(3)
+  ruby:
+    test 1, 2, arg: calc(3)
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      test 1, 2, arg: [calc(3)]
+  ruby:
+    test 1, 2, arg: [calc(3)]
 
 section.center
-  pre(contenteditable=true): code.ruby
+  ruby:
+    weather regions: {sofia: timezone(:eest)}
+
+section.center
+  ruby:
+    proc_call_syntax.(:proc, :arguments)
+
+section.center
+  ruby:
+    delay.calculation(:low_priotity).and_wait(4).it
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6507") rubocop#6507
+  p.white.fragment Edge cases for Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    super()
+
+section.center
+  ruby:
+    foo(a) && bar(b)
+    foo(a) || bar(b)
+
+section.center
+  ruby:
+    method(*args)
+    method(**kwargs)
+    method(&block)
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6524") rubocop#6524
+  p.white.fragment A bit more edge cases for Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    foo.include?(bar) ? bar : quux
+
+section.center
+  ruby:
+    ConstantLikeMethod()
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6538") rubocop#6538
+  p.white.fragment Don't assume parentheses in chaining if there were none before
+
+section.center data-background="#000"
+  p.white When it is <strong>subjective</strong> to omit parentheses in Ruby?
+
+section.center
+  pre(contenteditable=true): code.yml
     '
-      weather regions: {sofia: timezone(:eest)}
+      Style/MethodCallWithArgsParentheses:
+        EnforcedStyle: omit_parentheses
+        AllowParenthesesInChaining: true
+
+section.center
+  ruby:
+    Rails.logger.error("oops")
+
+section.center
+  ruby:
+    Rails.logger.error("oops")
+    #                 ^^^^^^^^ Omit parentheses for method calls with arguments.
+
+section.center
+  p 🤷
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6555") rubocop#6555
+  p.white.fragment Optionally, allow parentheses in control flow conditions #6555
+
+section.center
+  ruby:
+    server.create(Reader::PROCESSED_FOLDER) unless server.list('', Reader::PROCESSED_FOLDER)
+    #                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+    #            ^^^^^^^^^^^^^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+    #
+    #
+
+section.center data-background="#f00"
+  p 🙅
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6562") rubocop#6562
+  p.white.fragment Fix a false positive parentheses omission in safe navigation calls
+
+section.center
+  ruby:
+    @accountant_id = User.find_by(email: email)&.id
+    #                            ^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+    #
+    #
+
+section.center
+  ruby:
+    @accountant_id = User.find_by(email: email)&.id # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6598") rubocop#6598
+  p.white.fragment Various fixes for the omit_parentheses style of Style/MethodCallWithArgsParentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    foo(/a*b*/)
+    #   ^^^^^^^^ Omit parentheses for method calls with arguments.
+    #
+
+section.center
+  ruby:
+    foo(/a*b*/) # 👑
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to omit parentheses in Ruby?
+
+section.center
+  ruby:
+    def bulgarian_style(arg = default(42))
+      #                              ^^^^ Omit parentheses for method calls with arguments.
+      nil
+    end
+
+section.center
+  ruby:
+    def bulgarian_style(arg = default(42)) # 👑
+      nil
+    end
+
+section.center
+  ruby:
+    def seatle_style arg = default(42)
+      #                           ^^^^ Omit parentheses for method calls with arguments.
+      nil
+    end
+
+section.center
+  ruby:
+    def seatle_style arg = default(42) # 👑
+      nil
+    end
+
+section.center
+  ruby:
+    foo(bar(:arg) { 42 })
+    #       ^^^^^^ Omit parentheses for method calls with arguments.
+    #
+
+section.center
+  ruby:
+    foo(bar(:arg) { 42 }) # 👑
+
+section.center
+  ruby:
+    bar(:arg) { 42 } # 👑
+
+section.center data-background="#000"
+  p.white Why all the edge cases?
+
+section.center data-background="#000"
+  p.white We ran rubocop <strong>only</strong> on git changes
+
+section.center data-background="#000"
+  p.white 👍
+
+section.center data-background=image_path("rubocoping_with_legacy.png")
+  a.white.shadow(href="https://evilmartians.com/chronicles/rubocoping-with-legacy-bring-your-ruby-code-up-to-standard") 🤖
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6611") rubocop#6611
+  p.white.fragment Various omit_parentheses fixes Volume N+1
+
+section.center
+  ruby:
+    def foo
+      if cond.present? && verify?(:something)
+        h.do_with(kw: value)
+      elsif cond.present? || verify?(:something_else)
+        h.do_with(kw: value)
+      elsif whatevs?
+        h.do_with(kw: value)
+        #        ^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+      end
+    end
+
+section.center
+  ruby:
+    def foo
+      if cond.present? && verify?(:something)
+        h.do_with(kw: value)
+        #        ^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+      elsif cond.present? || verify?(:something_else)
+        h.do_with(kw: value)
+        #        ^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+      elsif whatevs?
+        h.do_with(kw: value)
+        #        ^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+      end
+    end
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6683") rubocop#6683
+  p.white.fragment Fix super edge cases for omit_parentheses style of Style/MethodCallWithArgsParentheses #6683
+
+section.center
+  ruby:
+    super foo(bar)
+    #        ^^^^^ Omit parentheses for method calls with arguments.
+    #
+
+section.center
+  ruby:
+    super foo(bar) # 👑
+
+section.center
+  ruby:
+    super(foo(bar)) { yield }
+    #    ^^^^^^^^^^ Omit parentheses for method calls with arguments.
+    #
 
 section.center
   pre(contenteditable=true): code.ruby
@@ -455,11 +661,6 @@ section.center
 section.center
   pre(contenteditable=true): code.ruby
     '
-      foo(/a*b*/)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
       def regular(arg = default(42))
         nil
       end
@@ -470,20 +671,6 @@ section.center
       def foo(bar: baz(42))
       end
 
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      ConstantLikeMethod()
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      proc_call_syntax.(:proc, :arguments)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      delay.calculation(:low_priotity).and_wait(4).it
 
 section.center
   pre(contenteditable=true): code.ruby
@@ -545,23 +732,6 @@ section.center
   pre(contenteditable=true): code.ruby
     '
       foo().bar(3).wait(4) + 4
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo(a) && bar(b)
-      foo(a) || bar(b)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      method(*args)
-      method(**kwargs)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo.include?(bar) ? bar : quux
 
 section.center
   pre(contenteditable=true): code.ruby
