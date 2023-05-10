@@ -337,7 +337,7 @@ section.center
 section.center
   ruby:
     test(
-    #   ^ Omit parentheses for method calls with arguments.
+      # ^ Omit parentheses for method calls with arguments.
       foo: bar
       quux: baz
     )
@@ -486,8 +486,6 @@ section.center
     server.create(Reader::PROCESSED_FOLDER) unless server.list('', Reader::PROCESSED_FOLDER)
     #                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
     #            ^^^^^^^^^^^^^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
-    #
-    #
 
 section.center data-background="#f00"
   p 🙅
@@ -500,8 +498,6 @@ section.center
   ruby:
     @accountant_id = User.find_by(email: email)&.id
     #                            ^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
-    #
-    #
 
 section.center
   ruby:
@@ -518,7 +514,6 @@ section.center
   ruby:
     foo(/a*b*/)
     #   ^^^^^^^^ Omit parentheses for method calls with arguments.
-    #
 
 section.center
   ruby:
@@ -557,7 +552,6 @@ section.center
   ruby:
     foo(bar(:arg) { 42 })
     #       ^^^^^^ Omit parentheses for method calls with arguments.
-    #
 
 section.center
   ruby:
@@ -619,7 +613,6 @@ section.center
   ruby:
     super foo(bar)
     #        ^^^^^ Omit parentheses for method calls with arguments.
-    #
 
 section.center
   ruby:
