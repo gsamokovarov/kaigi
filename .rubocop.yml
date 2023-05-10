@@ -1,0 +1,116 @@
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+
+Layout/ClosingParenthesisIndentation: {Enabled: true}
+Layout/DefEndAlignment: {EnforcedStyleAlignWith: start_of_line}
+Layout/DotPosition: {EnforcedStyle: trailing}
+Layout/EmptyLineBetweenDefs:
+  AllowAdjacentOneLineDefs: true
+Layout/EndOfLine: {EnforcedStyle: lf}
+Layout/LineLength:
+  Max: 120
+  AllowURI: true
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+  EnforcedStyle: new_line
+Layout/LineContinuationLeadingSpace: {Enabled: false}
+Layout/LineEndStringConcatenationIndentation: {EnforcedStyle: aligned}
+Layout/MultilineMethodCallIndentation: {EnforcedStyle: indented}
+Layout/MultilineOperationIndentation: {EnforcedStyle: indented}
+Layout/SpaceInLambdaLiteral: {EnforcedStyle: require_space}
+Layout/SpaceInsideHashLiteralBraces: {EnforcedStyle: no_space}
+Layout/IndentationWidth:
+  AllowedPatterns:
+    - "monitored .*, def "
+
+Lint/AmbiguousRange: {Enabled: false}
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+Lint/AmbiguousOperatorPrecedence: {Enabled: false}
+Lint/DuplicateBranch: {Enabled: false}
+Lint/UnusedBlockArgument: {AllowUnusedKeywordArguments: true}
+Lint/UnusedMethodArgument: {AllowUnusedKeywordArguments: true}
+
+Metrics/AbcSize: {Enabled: false}
+# This cop is still relatively new as of RuboCop 0.46 and its behavior is
+# changing fast. The implementation in RuboCop 0.46 still has problems with
+# some files with DSLs such as routes.rb, app's environment configs and others.
+# This has been discussed here: https://github.com/bbatsov/rubocop/issues/3772
+# We should re-enable this cop in a future RuboCop implementation.
+Metrics/BlockLength: {Enabled: false}
+Metrics/ClassLength: {Enabled: false}
+Metrics/CyclomaticComplexity: {Enabled: false}
+Metrics/MethodLength: {Max: 80, CountAsOne: [heredoc]}
+Metrics/ModuleLength:
+  Max: 500
+  Exclude:
+    - "spec/**/*"
+    - "test/**/*"
+
+Metrics/ParameterLists: {CountKeywordArgs: false, Max: 6}
+Metrics/PerceivedComplexity: {Enabled: false}
+
+Naming/HeredocDelimiterNaming: {Enabled: false}
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - "app/controllers/**/*"
+Naming/PredicateName:
+  ForbiddenPrefixes: [is_]
+Naming/RescuedExceptionsVariableName: {PreferredName: error}
+
+Style/AsciiComments: {Enabled: false}
+Style/AccessModifierDeclarations: {Enabled: false}
+Style/ArrayIntersect: {Enabled: false}
+Style/Documentation: {Enabled: false}
+Style/EmptyMethod: {Enabled: false}
+Style/ExplicitBlockArgument: {Enabled: false}
+Style/FetchEnvVar: {Enabled: false}
+Style/FloatDivision: {Enabled: false}
+Style/HashEachMethods: {Enabled: false}
+Style/HashSyntax: {EnforcedShorthandSyntax: always}
+Style/HashTransformKeys: {Enabled: true}
+Style/HashTransformValues: {Enabled: true}
+Style/GlobalStdStream: {Enabled: false}
+Style/GuardClause: {Enabled: false}
+Style/FormatStringToken: {Enabled: false}
+Style/MutableConstant: {Enabled: false}
+Style/ModuleFunction: {Enabled: false}
+Style/NumericPredicate: {Enabled: false}
+Style/PerlBackrefs: {Enabled: false}
+Style/SpecialGlobalVars: {Enabled: false}
+Style/TrailingCommaInArguments: {EnforcedStyleForMultiline: comma}
+Style/TrailingCommaInArrayLiteral: {EnforcedStyleForMultiline: comma}
+Style/TrailingCommaInHashLiteral: {EnforcedStyleForMultiline: comma}
+Style/DoubleNegation: {Enabled: false}
+Style/FrozenStringLiteralComment: {Enabled: false}
+Style/SingleLineBlockParams: {Enabled: false}
+Style/SignalException: {EnforcedStyle: only_raise}
+Style/LambdaCall: {EnforcedStyle: braces}
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  EnforcedStyle: omit_parentheses
+  AllowParenthesesInMultilineCall: true
+  AllowParenthesesInChaining: true
+  AllowParenthesesInCamelCaseMethod: true
+Style/MultilineBlockChain: {Enabled: false}
+Style/NumberedParameters: {Enabled: false}
+Style/NumberedParametersLimit: {Enabled: false}
+Style/OpenStructUse: {Enabled: false}
+Style/SymbolArray: {Enabled: true}
+Style/RedundantInitialize: {Enabled: false}
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
+    '%I': '()'
+    '%w': '()'
+    '%W': '()'
+Style/OptionalBooleanParameter:
+  Enabled: true
+  AllowedMethods:
+    - perform
+Style/YodaCondition: {EnforcedStyle: forbid_for_equality_operators_only}
+Style/Lambda: {Enabled: false}
+Style/ZeroLengthPredicate: {Enabled: false}
