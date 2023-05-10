@@ -105,9 +105,11 @@ section.center
       def account_seeds
         return [] unless Settings.seedgate
 
-        initialize_seeds Settings.seedgate.seed_definition_file,
-                         Settings.seedgate.watched_seeders_files
+        seeds_reinitialized =
+          initialize_seeds Settings.seedgate.seed_definition_file,
+                           Settings.seedgate.watched_seeders_files
 
+        @account_seeds = nil if seeds_reinitialized
         @account_seeds ||=
           Seeds.
             definitions_with_metadata.
@@ -124,9 +126,10 @@ section.center
 
         if previous_modification_times && @modification_times != previous_modification_times
           load definition_file
-          @account_seeds = nil
+          true
         else
           require definition_file
+          false
         end
       end
     end
@@ -191,7 +194,6 @@ section.center
                            Settings.seedgate.watched_seeders_files
 
         @account_seeds = nil if seeds_reinitialized
-
         @account_seeds ||=
           Seeds.
             definitions_with_metadata.
