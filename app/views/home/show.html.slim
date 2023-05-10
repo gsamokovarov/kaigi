@@ -69,7 +69,7 @@ section.center
     img.inline width="20%" src="https://www.ruby-lang.org/images/header-ruby-logo@2x.png"
   p.fragment 10 years of Ruby development!
 
-section.center data-background="#000"
+section.center data-background="#007d9c"
   p.white.fragment BUT...
 
 section.center data-background="#007d9c"
@@ -131,7 +131,7 @@ section.center
       end
     end
 
-section.center data-background=image_path("devs_doing_code_review.jpeg")
+section.center data-background=image_path("humans_doing_code_review.jpeg")
   blockquote.white.fragment
     p.shadow Cut the parens
 
@@ -142,36 +142,38 @@ section.center
   img.inline src=image_path("mario_crown.png") width="200px"
 
 section.center
-  pre(contenteditable=true): code.yml
-    '
-      Style/MethodCallWithArgsParentheses:
-        Description: 'Use parentheses for method calls with arguments.'
-        StyleGuide: '#method-invocation-parens'
-        Enabled: false
-        VersionAdded: '0.47'
-        VersionChanged: '1.7'
-        IgnoreMacros: true
-        AllowedMethods: []
-        AllowedPatterns: []
-        IncludedMacros: []
-        AllowParenthesesInMultilineCall: false
-        AllowParenthesesInChaining: false
-        AllowParenthesesInCamelCaseMethod: false
-        AllowParenthesesInStringInterpolation: false
-        EnforcedStyle: require_parentheses
-        SupportedStyles:
-          - require_parentheses
-          - omit_parentheses
+  ruby:
+    class NoParenthesesCop < RuboCop::Cop::Base
+      MSG = 'Omit parentheses for method calls with arguments.'
+
+      def on_send(node)
+        return unless node.parenthesized?
+
+        add_offense(node)
+      end
+    end
 
 section.center
-  pre(contenteditable=true): code.yml
-    '
-      Style/MethodCallWithArgsParentheses:
-        EnforcedStyle: omit_parentheses
-        AllowParenthesesInMultilineCall: false
-        AllowParenthesesInChaining: true
-        AllowParenthesesInCamelCaseMethod: false
-        AllowParenthesesInStringInterpolation: false
+  ruby:
+    class NoParenthesesCop < RuboCop::Cop::Base
+      MSG = 'Omit parentheses for method calls with arguments.'
+
+      def on_send(node)
+        return unless node.parenthesized?
+        return if legitimate_call_with_parentheses?(node)
+
+        add_offense(node)
+      end
+    end
+
+section.center data-background=image_path("bad_cops.png")
+  p.white-on-black.fragment This is a talk about syntax
+
+section.center data-background=image_path("bad_cops.png")
+  p.white-on-black. <del>This is a talk about syntax</del>
+
+section.center data-background=image_path("bad_cops.png")
+  p.white-on-black.fragment This is a talk about solving a cultural problem through technical means
 
 section.center data-background=image_path("trakia_vakarel.jpg")
   h1.white.shadow Side note
@@ -228,6 +230,28 @@ section.center
   pre(contenteditable=true): code.yml
     '
       Style/MethodCallWithArgsParentheses:
+        Description: 'Use parentheses for method calls with arguments.'
+        StyleGuide: '#method-invocation-parens'
+        Enabled: false
+        VersionAdded: '0.47'
+        VersionChanged: '1.7'
+        IgnoreMacros: true
+        AllowedMethods: []
+        AllowedPatterns: []
+        IncludedMacros: []
+        AllowParenthesesInMultilineCall: false
+        AllowParenthesesInChaining: false
+        AllowParenthesesInCamelCaseMethod: false
+        AllowParenthesesInStringInterpolation: false
+        EnforcedStyle: require_parentheses
+        SupportedStyles:
+          - require_parentheses
+          - omit_parentheses
+
+section.center
+  pre(contenteditable=true): code.yml
+    '
+      Style/MethodCallWithArgsParentheses:
         EnforcedStyle: omit_parentheses
         AllowParenthesesInMultilineCall: false
         AllowParenthesesInChaining: false
@@ -252,15 +276,9 @@ section.center
     li Others
 
 section.center
-  h2 Agenda
+  h2 Scope
   ul.left-aligned-text.styled
     li.fragment whitequark/parser
-    li.fragment Method dispatch parsing
-    li.fragment RuboCop development
-
-section.center
-  h2 Agenda
-  ul.left-aligned-text.styled
     li.fragment Style/MethodCallWithArgsParentheses <br> EnforcedStyle: omit_parentheses
     li.fragment Style/HashSyntax <br> EnforcedShorthandSyntax: always
 
@@ -283,29 +301,8 @@ section.center
     puts ast
 
 section.center data-background="#000"
-  h2.white Method dispatch parsing <span class="gray">101</span>
-
-section.center
-  ruby:
-    Kernel.puts "Oh, hi Ruby Kaigi!"
-
-section.center
-  ruby:
-    puts "Oh, hi Ruby Kaigi!"
-
-section.center
-  ruby:
-    self.puts "Oh, hi Ruby Kaigi!"
-
-section.center
-  ruby:
-    3.times { puts "Hip, hip, hooray!" }
-
-section.center
-  ruby:
-    attendees.sample(50).each do |attendee|
-      TrainTicket.book train, attendee:
-    end
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/6469") rubocop#6469
+  p.white.fragment Introduce a cop to enforce method calls without parentheses
 
 section.center data-background="#000"
   p.white When can we <strong>can</strong> omit parentheses in Ruby?
@@ -314,7 +311,6 @@ section.center
   ruby:
     test()
     #   ^^ Omit parentheses for method calls with arguments.
-    #
 
 section.center
   ruby:
@@ -324,7 +320,6 @@ section.center
   ruby:
     Array(list)
     #    ^^^^^^ Omit parentheses for method calls with arguments.
-    #
 
 section.center
   ruby:
@@ -397,7 +392,7 @@ section.center
     end
 
 section.center data-background="#000"
-  p.white When can we <strong>cannot</strong> omit parentheses in Ruby?
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
 
 section.center
   ruby:
@@ -693,23 +688,6 @@ section.center
     foo(+1) # 👑
 
 section.center data-background="#000"
-  p: a.white(href="https://github.com/rubocop/rubocop/pull/8346") rubocop#8346
-  p.white.fragment Allow parentheses in single-line inheritance
-
-section.center data-background="#000"
-  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
-
-section.center
-  ruby:
-    class Point < Struct.new(:x, :y); end
-    #                       ^^^^^^^^ Omit parentheses for method calls with arguments.
-
-section.center
-  ruby:
-    class Point < Struct.new(:x, :y); end # 👑
-
-
-section.center data-background="#000"
   p: a.white(href="https://github.com/rubocop/rubocop/pull/9620") rubocop#9620
   p.white.fragment Allow parentheses in operator method calls for Style/MethodCallWithArgsParentheses
 
@@ -784,9 +762,6 @@ section.center
     end
 
 section.center
-  p Removing the parens will start an endless range with the beginning being the result of the method call without arguments.
-
-section.center
   ruby:
     def delegated_call(...)
       @proxy.call(...) # 👑
@@ -831,188 +806,248 @@ section.center
       delete server
     end
 
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      [
-        Stat.new("Users Today") do
-          User.today.count
-        end,
-        Stat.new("Servers Today") do
-          Server.today.count
-        end
-      ]
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      render json: FieldSearch.with(search_params).map(&method(:serialize))
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo(/a*b*/)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      def regular(arg = default(42))
-        nil
-      end
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      def foo(bar: baz(42))
-      end
-
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo(1) { 2 }
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo({hash: literal_anywhere_as_argument})
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      hash.should eq({})
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      call(value_omission_as_last_argument:)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      call(...)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      if success = destroy_remote(server)
-        delete server
-      end
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      def oneliner = any_method_call(with_arguments)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      yield path, File.basename(path)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      class Point < Struct.new(:x, :y); end
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      1..limit(n)
-      1...limit(n)
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/11403") rubocop#11403
+  p.white.fragment Fix bad offense for parenthesised calls in literals 
 
 section.center data-background="#000"
-  p.white When it is <strong>ambiguous</strong> to omit parentheses in Ruby?
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
 
 section.center
-  pre(contenteditable=true): code.ruby
+  ruby:
+    [
+      Stat.new("Users Today") do
+      #        ^^^^^^^^^^^^^^ Omit parentheses for method calls with arguments.
+
+        User.today.count
+      end,
+    ]
+
+section.center
+  ruby:
+    [
+      Stat.new("Users Today") do # 👑
+
+        User.today.count
+      end,
+    ]
+
+section.center data-background="#000"
+  h2.white Ruby 3.1
+
+section.center
+  img.inline src=image_path("value_omission_headline.png")
+
+section.center
+  pre(contenteditable=true): code.yml
     '
-      foo().bar(3).wait(4) + 4
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      data&.[](value)
-      value.===(other)
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      foo bar:
-      42
-
-section.center
-  a href="https://bugs.ruby-lang.org/issues/18396" An unexpected "hash value omission" syntax error when without parentheses call expr follows
+      Style/HashSyntax:
+        EnforcedShorthandSyntax: always
 
 section.center data-background="#000"
   h2.white.fragment VALUE <span class="fragment">OMISSION</span> <span class="fragment">SYNTAX</span>
   p.white.fragment without parentheses
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      create :integration_shop, account:, user: non_omitted_user # 👑
-      pass
+  ruby:
+    create :integration_shop, account:, user: # 👑
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      create :integration_shop, account:, user: # 🤮
-      pass
+  ruby:
+    create :integration_shop, account:, user: # 🤮
+    action :do_something
 
 section.center
-  pre(contenteditable=true): code.ruby
+  ruby:
+    create :integration_shop, account:, user: other_user # 👑
+    action :do_something
+
+section.center
+  a href="https://bugs.ruby-lang.org/issues/18396" An unexpected "hash value omission" syntax error when without parentheses call expr follows
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/11428") rubocop#11428
+  p.white.fragment Apply value omission exceptions in super invocations
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    return super current_user, primary: primary unless condition
+  p 🤖👇
+  ruby:
+    return super current_user, primary: unless condition # 🤮
+
+section.center
+  ruby:
+    return super(current_user, primary:) unless condition # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/11456") rubocop#11456
+  p.white.fragment Fix value omissions in yield invocations
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    yield value: value, other: other
+    foo baz
+  p 🤖👇
+  ruby:
+    yield value: , other: # 🤮
+    foo baz
+
+section.center
+  ruby:
+    yield(value: value, other: other) # 👑
+    foo baz
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/11575") rubocop#11575
+  p.white.fragment Fix missing parentheses in shorthand hash syntax as argument calls
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    if condition?
+      raise Error.new 'A long error message...', foo: foo
+    end
+  p 🤖👇
+  ruby:
+    raise Error.new 'A long error message...', foo: if condition? # 🤮
+
+section.center
+  ruby:
+    raise Error.new('A long error message...', foo:) if condition? # 👑
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/11516") rubocop#11516
+  p.white.fragment Fix parentheses in value omissions for multiple assignments 
+
+section.center data-background="#000"
+  p.white When it is <strong>required</strong> to use parentheses in Ruby?
+
+section.center
+  ruby:
+    foo = foo = do_stuff arg, opt1: opt1,
+                              opt2: opt2
+
+    something.each { pass }
+
+section.center
+  ruby:
+    foo = foo = do_stuff arg, opt1:, # 🤮
+                              opt2:
+
+    something.each { pass }
+
+section.center
+  ruby:
+    foo = foo = do_stuff(arg, opt1:, # 👑
+                              opt2: )
+
+    something.each { pass }
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/11643") rubocop#11643
+  p.white.fragment Fix incorrect shorthand autocorrections in calls inside parentheses
+
+section.center data-background="#000"
+  p.white When it is <strong>ALL COMES CRASHING DOWN</strong> 🔥
+
+section.center
+  ruby:
+    receipt = create :receipt, account: account,
+      integration_shop: (create :integration_shop, account: account)
+    pass
+
+section.center
+  ruby:
+    receipt = create :receipt, account: account,
+      integration_shop: create :integration_shop, account: account
+    pass
+
+section.center
+  pre(conenteditable=true): code.yml
     '
-      if condition?
-        raise Error.new 'A long error message...', foo: # 👑
+      AllCops:
+        TargetRubyVersion: 3.1
+      Style/HashSyntax:
+        EnforcedShorthandSyntax: always
+      Style/RedundantParentheses:
+        Enabled: true
+      Style/MethodCallWithArgsParentheses:
+        Enabled: true
+        EnforcedStyle: omit_parentheses
+
+section.center
+  ol.left-aligned-text
+    li Style/HashSyntax puts parentheses in <br> (create(:integration_shop, account:))
+    li Style/MethodCallWithArgsParentheses autocorrects to <br> (create :integration_shop, account:)
+    li Style/RedundantParentheses removes parens to <br> create :integration_shop, account:
+
+section.center data-background="#000"
+  p: a.white(href="https://github.com/rubocop/rubocop/pull/11709") rubocop#11709
+  p.white.fragment Fix value omission false positive in Style/MethodCallWithArgsParentheses
+
+section.center
+  ruby:
+    var =
+      unless object.action(value:, other:)
+        condition || other_condition
       end
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      if condition?
-        raise Error.new 'A long error message...', foo: if condition # 🤮
+  ruby:
+    var =
+      unless object.action value:, other:
+        condition || other_condition
       end
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      if condition?
-        raise Error.new('A long error message...', foo:) if condition # 👑
+  ruby:
+    var =
+      unless object.action value:, other: condition || other_condition
+        # 🔥
       end
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      var =
-        unless object.action value:, other:
-          condition || other_condition
-        end
+  ruby:
+    var =
+      unless object.action(value:, other:) # 👑
+        condition || other_condition
+      end
 
 section.center
-  pre(contenteditable=true): code.ruby
-    '
-      var =
-        unless object.action value:, other: # 😖
-          condition || other_condition
-        end
-
-section.center
-  pre(contenteditable=true): code.ruby
-    '
-      var =
-        unless object.action value:, other: condition || other_condition # 🤦
-        end
-      # => nil
+  p: a(href="https://github.com/rubocop/rubocop/pull/11712") rubocop#11712
+  p.fragment Fix a crash in Lint/EmptyConditionalBody
 
 section.center
   p Value omission syntax without parantheses is tricky!
 
-section.center data-background="#000"
-  h2.white whitequark/parser
-
-section.center data-background="#000"
-  h2.white ruby-parse
-
 section.center
-  p Invaluable tool for RuboCop development!
+  h2 Editorials
+  ul.styled.left-aligned-text
+    li: a(href="https://batsov.com/articles/2022/01/20/bad-ruby-hash-value-omission") Bozhidar Batsov: Bad Ruby: Hash Value Omission
+    li: a(href="https://zverok.space/blog/2021-12-08-value-omission-debug.html") Victor Shepelev: Small nice feature that emerged in Ruby 3.1... But has a nasty quirk
 
+section.center data-background="#000"
+  h1
+    a(style="font-weight: bold; font-size: 36px;" href="https://war.ukraine.ua") <span style="color: #0057b7;">SAVE</span> <span style="color: #ffd700;">UKRAINE</span>
+
+section.center data-background="#000"
+  p.white.fragment 5 years
+
+section.center data-background="#000"
+  p.white 50+ pull requests
+
+section.center data-background=image_path("robots_doing_code_review.png")
+  blockquote.white.fragment
+    p.shadow ^^^ Omit parentheses for method calls with arguments
+
+section.center data-background=image_path("robots_doing_code_review.png")
+  h2.white.shadow Thank you! <span class="fragment">🤖</span>

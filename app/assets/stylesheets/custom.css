@@ -1,7 +1,9 @@
 .reveal .white { color: #fff; }
 .reveal .gray { color: #777; }
-.reveal .red { color: #F00; }
+.reveal .red { color: #f00; }
 .reveal .black { color: #000; }
+
+.reveal .white-on-black { background-color: #000; color: #fff; padding: 5px; }
 
 /* Bump CSS specificity for this particular selector. */
 .reveal a.white:not(.image) { color: #fff; }
@@ -76,7 +78,7 @@ pre > button {
   position: absolute;
   bottom: 0;
   right: 1em;
-  padding: 0.2em;
+  padding: 5px;
   background: red;
   color: white;
   border: none;
