@@ -32,14 +32,16 @@ function parseRuby() {
 					anotherCode.textContent = rubyAST.code
 
 					const anotherPre = document.createElement('pre')
-					anotherCode.className = 'parsed-code'
+					anotherPre.className = 'parsed-code'
 					anotherPre.contentEditable = true
 					anotherPre.appendChild(anotherCode)
 					anotherPre.style.background = '#ededed'
 					anotherPre.style.padding = '.5em'
 
-					pre.nextSibling?.remove()
-					pre.parentNode.appendChild(anotherPre)
+					const maybePreWithParsedCode = pre.nextSibling
+					if (maybePreWithParsedCode?.classList?.contains('parsed-code')) maybePreWithParsedCode.remove()
+
+					pre.insertAdjacentElement('afterend', anotherPre)
 
 					hljs.highlightBlock(anotherPre)
 					Reveal.layout()
