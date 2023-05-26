@@ -10,8 +10,8 @@ gem 'rails'
 gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier'
+# Use ES6 for JavaScript assets.
+gem 'babel-transpiler'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
